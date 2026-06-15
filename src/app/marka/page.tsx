@@ -1,320 +1,277 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, Copy, Check, Palette, FileText, CreditCard } from 'lucide-react';
+import { Download, Copy, Check } from 'lucide-react';
 
 const NAVY = '#1a3a5c';
 const GOLD = '#e8a020';
 const RED = '#c0392b';
 
-// ── Logo SVG jako string (do pobrania) ──────────────────────────────────────
-const LOGO_SVG_COLOR = `<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width="600" height="200">
-  <polyline points="14,30 14,84 60,84" fill="none" stroke="#e8a020" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="24,16 60,16 60,70" fill="none" stroke="#1a3a5c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="178" y="57" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#1a3a5c" letter-spacing="-0.5" text-anchor="middle">BT-Styl</text>
-  <text x="178" y="84" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#9a7a5a" letter-spacing="3" text-anchor="middle">SALON FIRMOWY ADAMS</text>
+// ── SVG strings do pobrania ──────────────────────────────────────────────────
+const SVG_COLOR = `<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width="600" height="200">
+  <polyline points="10,26 10,88 64,88" fill="none" stroke="#e8a020" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="22,12 64,12 64,72" fill="none" stroke="#1a3a5c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="178" y="54" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#1a3a5c" letter-spacing="-0.5" text-anchor="middle">BT-Styl</text>
+  <text x="178" y="82" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#9a7a5a" letter-spacing="3" text-anchor="middle">SALON FIRMOWY ADAMS</text>
 </svg>`;
 
-const LOGO_SVG_WHITE = `<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width="600" height="200">
-  <polyline points="14,30 14,84 60,84" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <polyline points="24,16 60,16 60,70" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="178" y="57" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#ffffff" letter-spacing="-0.5" text-anchor="middle">BT-Styl</text>
-  <text x="178" y="84" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="3" text-anchor="middle">SALON FIRMOWY ADAMS</text>
+const SVG_WHITE = `<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width="600" height="200">
+  <polyline points="10,26 10,88 64,88" fill="none" stroke="#e8a020" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="22,12 64,12 64,72" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="178" y="54" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#ffffff" letter-spacing="-0.5" text-anchor="middle">BT-Styl</text>
+  <text x="178" y="82" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="3" text-anchor="middle">SALON FIRMOWY ADAMS</text>
 </svg>`;
 
-const LOGO_SYMBOL = `<svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" width="140" height="140">
+const SVG_SYMBOL = `<svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" width="140" height="140">
   <polyline points="6,18 6,62 42,62" fill="none" stroke="#e8a020" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   <polyline points="14,8 42,8 42,50" fill="none" stroke="#1a3a5c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 
-function downloadSVG(content: string, filename: string) {
+function download(content: string, filename: string) {
   const blob = new Blob([content], { type: 'image/svg+xml' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
+  a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
 }
 
-function CopyBtn({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
+function CopyHex({ hex }: { hex: string }) {
+  const [ok, setOk] = useState(false);
   return (
-    <button
-      onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-      className="flex items-center gap-1 text-xs px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 transition-colors"
-    >
-      {copied ? <Check size={12} className="text-green-600" /> : <Copy size={12} />}
-      {copied ? 'Skopiowano' : text}
+    <button onClick={() => { navigator.clipboard.writeText(hex); setOk(true); setTimeout(() => setOk(false), 1500); }}
+      className="flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-gray-100 hover:bg-gray-200 font-mono transition-colors">
+      {ok ? <Check size={11} className="text-green-600" /> : <Copy size={11} />} {hex}
     </button>
   );
 }
 
-// ── Komponenty logo inline SVG ───────────────────────────────────────────────
-function LogoColor({ width = 260 }: { width?: number }) {
+// ── Logo inline SVG ──────────────────────────────────────────────────────────
+function LogoColor({ w = 240 }: { w?: number }) {
   return (
-    <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width={width} height={width * 100 / 300}>
-      <polyline points="14,30 14,84 60,84" fill="none" stroke={GOLD} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-      <polyline points="24,16 60,16 60,70" fill="none" stroke={NAVY} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-      <text x="178" y="57" fontFamily="Georgia, serif" fontSize="28" fontWeight="700" fill={NAVY} letterSpacing="-0.5" textAnchor="middle">BT-Styl</text>
-      <text x="178" y="84" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="#9a7a5a" letterSpacing="3" textAnchor="middle">SALON FIRMOWY ADAMS</text>
+    <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width={w} height={w / 3}>
+      <polyline points="10,26 10,88 64,88" fill="none" stroke={GOLD} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="22,12 64,12 64,72" fill="none" stroke={NAVY} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+      <text x="178" y="54" fontFamily="Georgia, serif" fontSize="36" fontWeight="700" fill={NAVY} letterSpacing="-0.5" textAnchor="middle">BT-Styl</text>
+      <text x="178" y="82" fontFamily="Arial, sans-serif" fontSize="12.5" fontWeight="700" fill="#9a7a5a" letterSpacing="3" textAnchor="middle">SALON FIRMOWY ADAMS</text>
     </svg>
   );
 }
 
-function LogoWhite({ width = 260 }: { width?: number }) {
+function LogoWhite({ w = 240 }: { w?: number }) {
   return (
-    <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width={width} height={width * 100 / 300}>
-      <polyline points="14,30 14,84 60,84" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-      <polyline points="24,16 60,16 60,70" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-      <text x="178" y="57" fontFamily="Georgia, serif" fontSize="28" fontWeight="700" fill="#ffffff" letterSpacing="-0.5" textAnchor="middle">BT-Styl</text>
-      <text x="178" y="84" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="700" fill="rgba(255,255,255,0.65)" letterSpacing="3" textAnchor="middle">SALON FIRMOWY ADAMS</text>
+    <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" width={w} height={w / 3}>
+      <polyline points="10,26 10,88 64,88" fill="none" stroke={GOLD} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="22,12 64,12 64,72" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+      <text x="178" y="54" fontFamily="Georgia, serif" fontSize="36" fontWeight="700" fill="#fff" letterSpacing="-0.5" textAnchor="middle">BT-Styl</text>
+      <text x="178" y="82" fontFamily="Arial, sans-serif" fontSize="12.5" fontWeight="700" fill="rgba(255,255,255,0.65)" letterSpacing="3" textAnchor="middle">SALON FIRMOWY ADAMS</text>
     </svg>
   );
 }
 
-function Symbol({ size = 60, navy = NAVY, gold = GOLD }: { size?: number; navy?: string; gold?: string }) {
+function Symbol({ size = 56 }: { size?: number }) {
   return (
     <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
-      <polyline points="6,18 6,62 42,62" fill="none" stroke={gold} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-      <polyline points="14,8 42,8 42,50" fill="none" stroke={navy} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="6,18 6,62 42,62" fill="none" stroke={GOLD} strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="14,8 42,8 42,50" fill="none" stroke={NAVY} strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
 
 // ── Wizytówka ────────────────────────────────────────────────────────────────
-function BusinessCard({ side }: { side: 'front' | 'back' }) {
+function CardFront() {
   return (
-    <div className="w-[340px] h-[192px] rounded-xl shadow-2xl overflow-hidden flex-shrink-0" style={{ fontFamily: 'Arial, sans-serif' }}>
-      {side === 'front' ? (
-        <div className="w-full h-full relative flex flex-col justify-between p-6" style={{ background: NAVY }}>
-          {/* złoty narożnik górny lewy */}
-          <div className="absolute top-0 left-0 w-28 h-28 opacity-10 rounded-br-full" style={{ background: GOLD }} />
-          <LogoWhite width={180} />
-          <div className="text-right">
-            <p className="text-white font-bold text-sm">Adam Szczepański</p>
-            <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.55)' }}>Właściciel / Doradca</p>
-          </div>
+    <div style={{ width: 338, height: 190, background: NAVY, borderRadius: 10, overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+      {/* dekoracja narożnik */}
+      <div style={{ position: 'absolute', top: -30, left: -30, width: 120, height: 120, borderRadius: '50%', background: GOLD, opacity: 0.12 }} />
+      <div style={{ position: 'absolute', bottom: 0, right: 0, width: 80, height: 80, borderRadius: '50% 0 0 0', background: GOLD, opacity: 0.08 }} />
+      <div style={{ padding: '22px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', boxSizing: 'border-box' }}>
+        <LogoWhite w={190} />
+        <div style={{ textAlign: 'right' }}>
+          <div style={{ color: '#fff', fontFamily: 'Georgia, serif', fontSize: 14, fontWeight: 700 }}>Bogdan Tymofijewicz</div>
+          <div style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Arial, sans-serif', fontSize: 10, marginTop: 2, letterSpacing: 1 }}>WŁAŚCICIEL / DORADCA</div>
         </div>
-      ) : (
-        <div className="w-full h-full flex" style={{ background: '#f8f5f0' }}>
-          {/* złoty pasek lewy */}
-          <div className="w-2 flex-shrink-0" style={{ background: GOLD }} />
-          <div className="flex flex-col justify-center px-5 py-4 gap-1.5 flex-1">
-            <div className="flex items-center gap-2 text-xs" style={{ color: NAVY }}>
-              <span className="font-bold">📍</span>
-              <span>ul. Bagienna 6, 70-772 Szczecin</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs" style={{ color: NAVY }}>
-              <span className="font-bold">📞</span>
-              <span>91 454-09-99 · 695 878 585</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs" style={{ color: NAVY }}>
-              <span className="font-bold">✉</span>
-              <span>biuro@dobreoknaszczecin.pl</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs" style={{ color: NAVY }}>
-              <span className="font-bold">🌐</span>
-              <span>dobreoknaszczecin.pl</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs mt-1" style={{ color: '#888' }}>
-              <span className="font-bold">🕐</span>
-              <span>Pn–Pt 9:00–17:00 · Sob 9:00–13:00</span>
-            </div>
-          </div>
-          <div className="flex items-end pb-4 pr-4">
-            <Symbol size={42} />
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
 
-// ── Papier firmowy ───────────────────────────────────────────────────────────
+function CardBack() {
+  return (
+    <div style={{ width: 338, height: 190, background: '#f8f5f0', borderRadius: 10, overflow: 'hidden', position: 'relative', display: 'flex', flexShrink: 0 }}>
+      <div style={{ width: 5, background: GOLD, flexShrink: 0 }} />
+      <div style={{ flex: 1, padding: '18px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 8 }}>
+        {[
+          { icon: '📍', text: 'ul. Bagienna 6, 70-772 Szczecin' },
+          { icon: '📞', text: '91 454-09-99  ·  695 878 585' },
+          { icon: '✉', text: 'biuro@dobreoknaszczecin.pl' },
+          { icon: '🌐', text: 'dobreoknaszczecin.pl' },
+          { icon: '🕐', text: 'Pn–Pt 9–17  ·  Sob 9–13' },
+        ].map(({ icon, text }) => (
+          <div key={text} style={{ display: 'flex', gap: 8, alignItems: 'center', fontFamily: 'Arial, sans-serif', fontSize: 11, color: NAVY }}>
+            <span style={{ fontSize: 13, width: 18, textAlign: 'center' }}>{icon}</span>
+            <span>{text}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'flex-end', padding: '0 16px 16px 0' }}>
+        <Symbol size={40} />
+      </div>
+    </div>
+  );
+}
+
+// ── Papier firmowy ────────────────────────────────────────────────────────────
 function Letterhead() {
   return (
-    <div className="w-full max-w-[520px] bg-white shadow-xl rounded-xl overflow-hidden" style={{ fontFamily: 'Arial, sans-serif', aspectRatio: '1/1.414' }}>
+    <div style={{ width: '100%', maxWidth: 560, background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.10)', fontFamily: 'Arial, sans-serif', aspectRatio: '1/1.414' }}>
       {/* nagłówek */}
-      <div className="flex items-end justify-between px-8 pt-6 pb-4 border-b-2" style={{ borderColor: GOLD }}>
-        <LogoColor width={180} />
-        <div className="text-right text-xs leading-5" style={{ color: '#666' }}>
-          <p style={{ color: NAVY, fontWeight: 700 }}>BT-Styl Salon Firmowy AdamS</p>
-          <p>ul. Bagienna 6, 70-772 Szczecin</p>
-          <p>tel. 91 454-09-99</p>
-          <p>biuro@dobreoknaszczecin.pl</p>
+      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '24px 32px 16px', borderBottom: `2px solid ${GOLD}` }}>
+        <LogoColor w={180} />
+        <div style={{ textAlign: 'right', fontSize: 10, lineHeight: 1.8, color: '#666' }}>
+          <div style={{ color: NAVY, fontWeight: 700, fontSize: 11 }}>BT-Styl Salon Firmowy AdamS</div>
+          <div>ul. Bagienna 6, 70-772 Szczecin</div>
+          <div>tel. 91 454-09-99 · 695 878 585</div>
+          <div>biuro@dobreoknaszczecin.pl</div>
+          <div style={{ color: GOLD }}>dobreoknaszczecin.pl</div>
         </div>
       </div>
-      {/* treść */}
-      <div className="px-8 py-6">
-        <div className="text-xs text-gray-300 leading-6 space-y-2">
-          {[...Array(12)].map((_, i) => (
-            <div key={i} className="h-2 bg-gray-100 rounded" style={{ width: i % 3 === 2 ? '60%' : '100%' }} />
-          ))}
-        </div>
+      {/* miejsce na treść */}
+      <div style={{ padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {[100, 100, 100, 60, 100, 100, 80, 100, 100, 45, 100, 100, 70].map((w, i) => (
+          <div key={i} style={{ height: 7, background: '#f0f0f0', borderRadius: 4, width: `${w}%` }} />
+        ))}
       </div>
       {/* stopka */}
-      <div className="absolute bottom-0 left-0 right-0 px-8 py-3 flex items-center justify-between border-t" style={{ borderColor: '#eee' }}>
-        <div className="flex items-center gap-2">
-          <Symbol size={22} />
-          <span className="text-xs" style={{ color: '#aaa' }}>BT-Styl · Salon Firmowy AdamS · Szczecin</span>
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #eee', background: '#fff' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Symbol size={20} />
+          <span style={{ fontSize: 9, color: '#aaa' }}>BT-Styl Salon Firmowy AdamS · NIP: 000-000-00-00 · ul. Bagienna 6, Szczecin</span>
         </div>
-        <span className="text-xs" style={{ color: GOLD }}>dobreoknaszczecin.pl</span>
+        <span style={{ fontSize: 9, color: GOLD }}>dobreoknaszczecin.pl</span>
       </div>
     </div>
   );
 }
 
-// ── Sekcja ───────────────────────────────────────────────────────────────────
-function Section({ id, icon: Icon, title, children }: { id: string; icon: React.ElementType; title: string; children: React.ReactNode }) {
-  return (
-    <section id={id} className="mb-20">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${NAVY}10` }}>
-          <Icon size={18} style={{ color: NAVY }} />
-        </div>
-        <h2 className="text-xl font-bold" style={{ color: NAVY }}>{title}</h2>
-      </div>
-      {children}
-    </section>
-  );
-}
-
-// ── Główna strona ────────────────────────────────────────────────────────────
+// ── Główna strona ─────────────────────────────────────────────────────────────
 export default function MarkaPage() {
   return (
-    <div className="min-h-screen bg-gray-50" style={{ fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: '#f4f4f2', fontFamily: 'Arial, sans-serif' }}>
 
       {/* Hero */}
-      <div className="py-16 px-6 text-center" style={{ background: NAVY }}>
-        <div className="flex justify-center mb-6">
-          <LogoWhite width={280} />
-        </div>
-        <p className="text-sm mt-4" style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: 3 }}>
-          BRAND KIT · MATERIAŁY DO DRUKU · LOGOTYPY
+      <div style={{ background: NAVY, padding: '56px 24px 48px', textAlign: 'center' }}>
+        <LogoWhite w={280} />
+        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, letterSpacing: 4, marginTop: 20, textTransform: 'uppercase' }}>
+          Brand Kit · Materiały reklamowe · Logotypy
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-16">
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '60px 24px' }}>
 
-        {/* 1. Logotypy */}
-        <Section id="logo" icon={Palette} title="Logotypy">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* ── 1. LOGOTYPY ── */}
+        <h2 style={{ color: NAVY, fontSize: 13, fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase', marginBottom: 24 }}>01 · Logotypy</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 48 }}>
 
-            {/* Kolor */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm flex flex-col items-center gap-4 border border-gray-100">
-              <LogoColor width={200} />
-              <p className="text-xs text-gray-400 font-semibold tracking-widest">WERSJA KOLOROWA</p>
-              <button
-                onClick={() => downloadSVG(LOGO_SVG_COLOR, 'bt-styl-logo-kolor.svg')}
-                className="flex items-center gap-2 text-xs px-4 py-2 rounded-full text-white font-bold"
-                style={{ background: NAVY }}
-              >
-                <Download size={12} /> Pobierz SVG
-              </button>
-            </div>
-
-            {/* Biała */}
-            <div className="rounded-2xl p-8 shadow-sm flex flex-col items-center gap-4" style={{ background: NAVY }}>
-              <LogoWhite width={200} />
-              <p className="text-xs font-semibold tracking-widest" style={{ color: 'rgba(255,255,255,0.4)' }}>WERSJA BIAŁA</p>
-              <button
-                onClick={() => downloadSVG(LOGO_SVG_WHITE, 'bt-styl-logo-biale.svg')}
-                className="flex items-center gap-2 text-xs px-4 py-2 rounded-full font-bold"
-                style={{ background: GOLD, color: NAVY }}
-              >
-                <Download size={12} /> Pobierz SVG
-              </button>
-            </div>
-
-            {/* Symbol */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm flex flex-col items-center gap-4 border border-gray-100">
-              <div className="flex items-center justify-center h-[87px]">
-                <Symbol size={80} />
-              </div>
-              <p className="text-xs text-gray-400 font-semibold tracking-widest">SYMBOL / FAVICON</p>
-              <button
-                onClick={() => downloadSVG(LOGO_SYMBOL, 'bt-styl-symbol.svg')}
-                className="flex items-center gap-2 text-xs px-4 py-2 rounded-full text-white font-bold"
-                style={{ background: NAVY }}
-              >
-                <Download size={12} /> Pobierz SVG
-              </button>
-            </div>
-
+          <div style={{ background: '#fff', borderRadius: 12, padding: '32px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
+            <LogoColor w={210} />
+            <p style={{ fontSize: 10, color: '#aaa', fontWeight: 700, letterSpacing: 3 }}>WERSJA KOLOROWA</p>
+            <button onClick={() => download(SVG_COLOR, 'bt-styl-logo-kolor.svg')}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, background: NAVY, color: '#fff', border: 'none', borderRadius: 999, padding: '8px 18px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+              <Download size={12} /> Pobierz SVG
+            </button>
           </div>
 
-          {/* Paleta kolorów */}
-          <div className="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <p className="text-xs font-bold text-gray-500 tracking-widest mb-4">PALETA KOLORÓW</p>
-            <div className="flex flex-wrap gap-4">
-              {[
-                { name: 'Navy', hex: NAVY, label: 'Granatowy — kolor główny' },
-                { name: 'Gold', hex: GOLD, label: 'Złoty — akcent' },
-                { name: 'Red', hex: RED, label: 'Czerwony — CTA' },
-                { name: 'Warm', hex: '#9a7a5a', label: 'Ciepły beż — podpis' },
-                { name: 'White', hex: '#ffffff', label: 'Biały — tło', border: true },
-              ].map(({ name, hex, label, border }) => (
-                <div key={name} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg shadow-sm" style={{ background: hex, border: border ? '1px solid #eee' : undefined }} />
-                  <div>
-                    <p className="text-xs font-bold" style={{ color: NAVY }}>{label}</p>
-                    <CopyBtn text={hex} />
-                  </div>
+          <div style={{ background: NAVY, borderRadius: 12, padding: '32px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+            <LogoWhite w={210} />
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', fontWeight: 700, letterSpacing: 3 }}>WERSJA BIAŁA</p>
+            <button onClick={() => download(SVG_WHITE, 'bt-styl-logo-biale.svg')}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, background: GOLD, color: NAVY, border: 'none', borderRadius: 999, padding: '8px 18px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+              <Download size={12} /> Pobierz SVG
+            </button>
+          </div>
+
+          <div style={{ background: '#fff', borderRadius: 12, padding: '32px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 70 }}>
+              <Symbol size={70} />
+            </div>
+            <p style={{ fontSize: 10, color: '#aaa', fontWeight: 700, letterSpacing: 3 }}>SYMBOL / FAVICON</p>
+            <button onClick={() => download(SVG_SYMBOL, 'bt-styl-symbol.svg')}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, background: NAVY, color: '#fff', border: 'none', borderRadius: 999, padding: '8px 18px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+              <Download size={12} /> Pobierz SVG
+            </button>
+          </div>
+
+        </div>
+
+        {/* ── Paleta ── */}
+        <div style={{ background: '#fff', borderRadius: 12, padding: '24px 28px', marginBottom: 56, boxShadow: '0 1px 6px rgba(0,0,0,0.06)' }}>
+          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, color: '#aaa', marginBottom: 20 }}>PALETA KOLORÓW</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
+            {[
+              { label: 'Granatowy — kolor główny', hex: NAVY },
+              { label: 'Złoty — akcent', hex: GOLD },
+              { label: 'Czerwony — CTA', hex: RED },
+              { label: 'Ciepły beż — podpis', hex: '#9a7a5a' },
+              { label: 'Biały — tło', hex: '#ffffff', border: true },
+            ].map(({ label, hex, border }) => (
+              <div key={hex} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 8, background: hex, border: border ? '1px solid #ddd' : undefined, flexShrink: 0 }} />
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: NAVY, marginBottom: 4 }}>{label}</div>
+                  <CopyHex hex={hex} />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </Section>
+        </div>
 
-        {/* 2. Wizytówki */}
-        <Section id="wizytowki" icon={CreditCard} title="Wizytówki">
-          <p className="text-sm text-gray-500 mb-6">Wymiary: 90 × 51 mm. Projekt gotowy do druku (wydruk offsetowy / cyfrowy).</p>
-          <div className="flex flex-wrap gap-8 items-start">
-            <div>
-              <p className="text-xs font-bold text-gray-400 tracking-widest mb-3">PRZÓD</p>
-              <BusinessCard side="front" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-400 tracking-widest mb-3">TYŁ</p>
-              <BusinessCard side="back" />
-            </div>
+        {/* ── 2. WIZYTÓWKI ── */}
+        <h2 style={{ color: NAVY, fontSize: 13, fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>02 · Wizytówki</h2>
+        <p style={{ fontSize: 12, color: '#888', marginBottom: 24 }}>Format 90 × 51 mm. Projekt gotowy do druku offsetowego lub cyfrowego.</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, marginBottom: 16 }}>
+          <div>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, color: '#aaa', marginBottom: 10 }}>PRZÓD</p>
+            <CardFront />
           </div>
-          <div className="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-100 text-xs text-amber-800">
-            <strong>Druk:</strong> Aby zamówić druk, wyślij projekt na e-mail drukarni lub skorzystaj z usług np. Drukarnia.pl / Pixers. Minimalne zamówienie zwykle 100 szt. od ~80 zł.
+          <div>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, color: '#aaa', marginBottom: 10 }}>TYŁ</p>
+            <CardBack />
           </div>
-        </Section>
+        </div>
+        <div style={{ background: '#fefce8', border: '1px solid #fde68a', borderRadius: 10, padding: '12px 16px', fontSize: 11, color: '#92400e', marginBottom: 56 }}>
+          <strong>Gdzie drukować:</strong> drukarnia.pl, pixers.pl, vistaprint.pl — min. 100 szt. od ok. 60–90 zł. Pobierz SVG powyżej i wyślij do drukarni.
+        </div>
 
-        {/* 3. Papier firmowy */}
-        <Section id="papier" icon={FileText} title="Papier firmowy A4">
-          <p className="text-sm text-gray-500 mb-6">Format A4 (210 × 297 mm). Użyj jako szablonu w Word / Google Docs.</p>
-          <div className="flex justify-center relative">
-            <Letterhead />
-          </div>
-          <div className="mt-6 p-4 rounded-xl bg-blue-50 border border-blue-100 text-xs text-blue-800">
-            <strong>Wskazówka:</strong> Nagłówek i stopkę z tym projektem możesz ustawić jako szablon w Microsoft Word (Wstaw → Nagłówek → Edytuj nagłówek) lub Google Docs (Plik → Ustawienia strony).
-          </div>
-        </Section>
+        {/* ── 3. PAPIER FIRMOWY ── */}
+        <h2 style={{ color: NAVY, fontSize: 13, fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>03 · Papier firmowy A4</h2>
+        <p style={{ fontSize: 12, color: '#888', marginBottom: 24 }}>Format 210 × 297 mm. Szablon do użycia w Microsoft Word lub Google Docs.</p>
+        <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', marginBottom: 16 }}>
+          <Letterhead />
+        </div>
+        <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 10, padding: '12px 16px', fontSize: 11, color: '#1e3a8a', marginBottom: 56 }}>
+          <strong>Jak użyć:</strong> W Word → Wstaw → Nagłówek → Edytuj nagłówek. W Google Docs → Wstaw → Nagłówek i stopka.
+        </div>
 
-        {/* Zasady użycia */}
-        <div className="rounded-2xl p-8 text-sm leading-7" style={{ background: NAVY, color: 'rgba(255,255,255,0.7)' }}>
-          <p className="font-bold text-white mb-3">Zasady użycia logotypu</p>
-          <ul className="space-y-1 list-disc list-inside">
-            <li>Nie rozciągaj ani nie deformuj proporcji znaku.</li>
-            <li>Na jasnym tle — używaj wersji kolorowej. Na ciemnym — białej.</li>
-            <li>Zachowaj margines wokół logotypu równy co najmniej wysokości symbolu okna.</li>
+        {/* ── Zasady ── */}
+        <div style={{ background: NAVY, borderRadius: 12, padding: '28px 32px', color: 'rgba(255,255,255,0.65)', fontSize: 12, lineHeight: 2 }}>
+          <p style={{ color: '#fff', fontWeight: 700, fontSize: 14, marginBottom: 12 }}>Zasady użycia logotypu</p>
+          <ul style={{ paddingLeft: 18, margin: 0 }}>
+            <li>Nie rozciągaj ani nie zmieniaj proporcji znaku.</li>
+            <li>Na jasnym tle — wersja kolorowa. Na ciemnym — biała (ze złotym narożnikiem).</li>
+            <li>Zachowaj margines wokół logotypu równy wysokości symbolu okna.</li>
             <li>Nie nakładaj dodatkowych efektów (cień, kontur, gradient) na logotyp.</li>
-            <li>Minimalna szerokość logotypu: 80px na ekranie, 25 mm w druku.</li>
+            <li>Minimalna szerokość: 80 px na ekranie · 25 mm w druku.</li>
           </ul>
         </div>
 
       </div>
 
       {/* Footer */}
-      <div className="text-center py-8 text-xs text-gray-400 border-t border-gray-200">
+      <div style={{ textAlign: 'center', padding: '32px 24px', fontSize: 11, color: '#bbb', borderTop: '1px solid #e5e5e5' }}>
         © {new Date().getFullYear()} BT-Styl Salon Firmowy AdamS · ul. Bagienna 6, Szczecin ·{' '}
-        <a href="/" className="hover:underline" style={{ color: GOLD }}>wróć na stronę główną</a>
+        <a href="/" style={{ color: GOLD, textDecoration: 'none' }}>← wróć na stronę główną</a>
       </div>
+
     </div>
   );
 }

@@ -9,9 +9,9 @@ interface LogoProps {
 export function LogoSVG({ variant = 'color', width = 260, className = '' }: LogoProps) {
   const gold = '#e8a020';
   const navy = variant === 'light' ? '#ffffff' : '#1a3a5c';
-  const goldColor = variant === 'light' ? 'rgba(255,255,255,0.85)' : gold;
+  const goldColor = gold; // złoty zawsze złoty
   const textMain = variant === 'light' ? '#ffffff' : '#1a3a5c';
-  const textSub = variant === 'light' ? 'rgba(255,255,255,0.65)' : '#9a7a5a';
+  const textSub = variant === 'light' ? 'rgba(255,255,255,0.7)' : '#9a7a5a';
 
   const h = Math.round(width * 100 / 300);
 
