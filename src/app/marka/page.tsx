@@ -184,7 +184,9 @@ export default function MarkaPage() {
 
       {/* Hero */}
       <div style={{ background: NAVY, padding: '56px 24px 48px', textAlign: 'center' }}>
-        <LogoWhite w={280} />
+        <a href="/" style={{ display: 'inline-block', cursor: 'pointer' }}>
+          <LogoWhite w={280} />
+        </a>
         <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, letterSpacing: 4, marginTop: 20, textTransform: 'uppercase' }}>
           Brand Kit · Materiały reklamowe · Logotypy
         </p>

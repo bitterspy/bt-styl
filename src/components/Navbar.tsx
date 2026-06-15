@@ -13,13 +13,14 @@ const ofertaLinks = [
   { label: 'Rolety', href: '#rolety' },
 ];
 
-const navLinks = [
+const navLinks: { href: string; label: string; hasMega?: boolean; external?: boolean }[] = [
   { href: '#dlaczego-my', label: 'O Nas' },
   { href: '#opinie', label: 'Aktualności' },
   { href: '#okna-pcv', label: 'Oferta', hasMega: true },
   { href: '#realizacje', label: 'Realizacje' },
   { href: '#porady', label: 'Porady' },
   { href: '#kontakt', label: 'Kontakt' },
+  { href: '/marka', label: 'Do pobrania', external: true },
 ];
 
 export default function Navbar() {
@@ -72,7 +73,7 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center"
           >
-            <LogoSVG variant="color" width={200} />
+            <LogoSVG variant={scrolled ? 'color' : 'light'} width={200} />
           </a>
 
           {/* Desktop nav */}
@@ -120,6 +121,17 @@ export default function Navbar() {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                </li>
+              ) : link.external ? (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={`px-3 py-2 text-sm font-semibold tracking-wide uppercase transition-colors ${
+                      scrolled ? 'text-[#e8a020] hover:text-[#c0392b]' : 'text-[#e8a020] hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ) : (
                 <li key={link.href}>
@@ -197,6 +209,16 @@ export default function Navbar() {
                           </motion.div>
                         )}
                       </AnimatePresence>
+                    </li>
+                  ) : link.external ? (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        className="block w-full text-left font-medium py-2.5 border-b border-gray-100 transition-colors"
+                        style={{ color: '#e8a020' }}
+                      >
+                        {link.label}
+                      </a>
                     </li>
                   ) : (
                     <li key={link.href}>
