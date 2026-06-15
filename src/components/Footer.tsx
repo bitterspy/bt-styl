@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { contact } from '@/lib/data';
+import { LogoSVG } from './Logo';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -10,14 +11,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: '#1a3a5c' }}>
-                <span className="text-white font-bold text-sm">BT</span>
-              </div>
-              <div>
-                <div className="font-bold leading-none">BT-Styl</div>
-                <div className="text-xs leading-none" style={{ color: '#e8a020' }}>Salon Firmowy AdamS</div>
-              </div>
+            <div className="mb-4">
+              <LogoSVG variant="light" width={200} />
             </div>
             <p className="text-sm text-blue-200 leading-relaxed">
               Autoryzowany dealer AdamS na systemach VEKA w Szczecinie.
