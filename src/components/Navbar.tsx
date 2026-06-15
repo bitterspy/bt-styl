@@ -5,47 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
-const megaMenu = [
-  {
-    category: 'Okna PCV',
-    href: '#okna-pcv',
-    items: [
-      { label: 'AdamS – PASSIV-LINE ULTRA', href: '#okna-pcv' },
-      { label: 'AdamS – PASSIV-LINE PLUS', href: '#okna-pcv' },
-      { label: 'AdamS – VEKA SL 82', href: '#okna-pcv' },
-      { label: 'AdamS – VEKA PF 70', href: '#okna-pcv' },
-      { label: 'AdamS – IDEAL 8000', href: '#okna-pcv' },
-      { label: 'AdamS – COMFORT LINE NEO', href: '#okna-pcv' },
-      { label: 'AdamS – ELEGANT COMFORT-LINE', href: '#okna-pcv' },
-    ],
-  },
-  {
-    category: 'Drzwi Tarasowe / Balkonowe',
-    href: '#drzwi-tarasowe',
-    items: [
-      { label: 'Smart-Slide', href: '#drzwi-tarasowe' },
-      { label: 'HST Corner View', href: '#drzwi-tarasowe' },
-      { label: 'HST Basic', href: '#drzwi-tarasowe' },
-      { label: 'HST Passiv', href: '#drzwi-tarasowe' },
-      { label: 'HST SL 82', href: '#drzwi-tarasowe' },
-    ],
-  },
-  {
-    category: 'Drzwi',
-    href: '#drzwi',
-    items: [
-      { label: 'Zewnętrzne drzwi Vikking', href: '#drzwi' },
-    ],
-  },
-  {
-    category: 'Rolety',
-    href: '#rolety',
-    items: [
-      { label: 'Rolety Nadstawne', href: '#rolety' },
-      { label: 'Rolety Zewnętrzne', href: '#rolety' },
-      { label: 'Rolety Integro', href: '#rolety' },
-    ],
-  },
+const ofertaLinks = [
+  { label: 'Okna PCV', href: '#okna-pcv' },
+  { label: 'Drzwi Tarasowe / Balkonowe', href: '#drzwi-tarasowe' },
+  { label: 'Drzwi Zewnętrzne', href: '#drzwi' },
+  { label: 'Rolety', href: '#rolety' },
 ];
 
 const navLinks = [
@@ -136,7 +100,7 @@ export default function Navbar() {
                     <ChevronDown size={14} className={`transition-transform ${megaOpen ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {/* Mega menu dropdown */}
+                  {/* Dropdown Oferty */}
                   <AnimatePresence>
                     {megaOpen && (
                       <motion.div
@@ -146,33 +110,21 @@ export default function Navbar() {
                         transition={{ duration: 0.18 }}
                         onMouseEnter={() => setMegaOpen(true)}
                         onMouseLeave={() => setMegaOpen(false)}
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-1 bg-white shadow-2xl border-t-2 rounded-b-xl overflow-hidden"
-                        style={{ borderColor: '#c0392b', width: '780px' }}
+                        className="absolute left-0 top-full mt-1 bg-white shadow-xl border-t-2 rounded-b-xl overflow-hidden min-w-[220px]"
+                        style={{ borderColor: '#c0392b' }}
                       >
-                        <div className="grid grid-cols-4 gap-0 p-6">
-                          {megaMenu.map((col) => (
-                            <div key={col.category} className="pr-4">
-                              <div
-                                className="text-xs font-bold uppercase tracking-widest mb-3 pb-2 border-b-2"
-                                style={{ color: '#c0392b', borderColor: '#c0392b' }}
+                        <ul className="py-2">
+                          {ofertaLinks.map((item) => (
+                            <li key={item.href}>
+                              <button
+                                onClick={() => handleNavClick(item.href)}
+                                className="w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-[#c0392b] hover:bg-red-50 transition-colors"
                               >
-                                {col.category}
-                              </div>
-                              <ul className="space-y-1.5">
-                                {col.items.map((item) => (
-                                  <li key={item.label}>
-                                    <button
-                                      onClick={() => handleNavClick(item.href)}
-                                      className="text-left text-xs font-medium text-gray-700 hover:text-[#c0392b] transition-colors leading-tight w-full"
-                                    >
-                                      {item.label}
-                                    </button>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
+                                {item.label}
+                              </button>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -239,23 +191,16 @@ export default function Navbar() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
+                            className="overflow-hidden pl-3 pb-1"
                           >
-                            {megaMenu.map((col) => (
-                              <div key={col.category} className="pt-2 pb-1 pl-3">
-                                <div className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: '#c0392b' }}>
-                                  {col.category}
-                                </div>
-                                {col.items.map((item) => (
-                                  <button
-                                    key={item.label}
-                                    onClick={() => handleNavClick(item.href)}
-                                    className="block text-xs text-gray-600 py-0.5 hover:text-[#c0392b] text-left"
-                                  >
-                                    {item.label}
-                                  </button>
-                                ))}
-                              </div>
+                            {ofertaLinks.map((item) => (
+                              <button
+                                key={item.href}
+                                onClick={() => handleNavClick(item.href)}
+                                className="block w-full text-left text-sm text-gray-600 py-2 border-b border-gray-50 hover:text-[#c0392b] transition-colors"
+                              >
+                                {item.label}
+                              </button>
                             ))}
                           </motion.div>
                         )}
