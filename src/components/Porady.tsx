@@ -235,6 +235,58 @@ const categoryColors: Record<string, string> = {
   'Bezpieczeństwo': '#c0392b',
 };
 
+function renderContent(text: string) {
+  return text.split('\n').map((line, i) => {
+    if (!line.trim()) return <div key={i} className="h-2" />;
+
+    // Bold headers (lines starting with **)
+    if (/^\*\*(.+)\*\*$/.test(line.trim())) {
+      const match = line.trim().match(/^\*\*(.+)\*\*$/);
+      return <p key={i} className="font-bold text-gray-800 mt-3 mb-1">{match![1]}</p>;
+    }
+
+    // List items
+    if (/^- /.test(line.trim())) {
+      const item = line.trim().slice(2);
+      return (
+        <div key={i} className="flex gap-2 ml-2">
+          <span className="shrink-0 mt-1 text-[#c0392b]">•</span>
+          <span>{renderInline(item)}</span>
+        </div>
+      );
+    }
+
+    // Numbered list
+    if (/^\d+\. /.test(line.trim())) {
+      const match = line.trim().match(/^(\d+)\. (.+)/);
+      if (match) {
+        return (
+          <div key={i} className="flex gap-2 ml-2">
+            <span className="shrink-0 font-bold text-[#c0392b]">{match[1]}.</span>
+            <span>{renderInline(match[2])}</span>
+          </div>
+        );
+      }
+    }
+
+    // Table rows (skip for now — render as plain)
+    if (line.trim().startsWith('|')) {
+      return <p key={i} className="text-xs font-mono bg-gray-50 px-2 py-0.5 rounded">{line.trim()}</p>;
+    }
+
+    return <p key={i}>{renderInline(line)}</p>;
+  });
+}
+
+function renderInline(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    const match = part.match(/^\*\*([^*]+)\*\*$/);
+    if (match) return <strong key={i} className="font-semibold text-gray-800">{match[1]}</strong>;
+    return <span key={i}>{part}</span>;
+  });
+}
+
 function ArticleModal({ article, onClose }: { article: typeof articles[0]; onClose: () => void }) {
   return (
     <motion.div
@@ -285,8 +337,8 @@ function ArticleModal({ article, onClose }: { article: typeof articles[0]; onClo
           <h2 className="text-xl sm:text-2xl font-bold mb-4 leading-tight" style={{ color: '#1a3a5c' }}>
             {article.title}
           </h2>
-          <div className="text-sm text-gray-600 leading-relaxed space-y-3 whitespace-pre-line">
-            {article.content}
+          <div className="text-sm text-gray-600 leading-relaxed space-y-1">
+            {renderContent(article.content)}
           </div>
 
           <div className="mt-8 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center gap-4" style={{ background: '#f0f5fa' }}>

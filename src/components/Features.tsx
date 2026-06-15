@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { Ruler, Truck, Wrench, Star, X, Phone, CheckCircle2, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
@@ -11,7 +11,7 @@ const features = [
     icon: Ruler,
     title: 'Bezpłatny pomiar',
     description: 'Przyjeżdżamy do Ciebie. Profesjonalny pomiar i doradztwo bez zobowiązań.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    image: '/images/feat_pomiar.jpg',
     content: `Zanim zamówisz okna, musimy dokładnie wiedzieć co zamawiamy. Dlatego oferujemy **bezpłatny pomiar u Ciebie** — bez zobowiązań, bez ukrytych kosztów.
 
 **Co obejmuje wizyta pomiarowa:**
@@ -33,7 +33,7 @@ W dni robocze i soboty, w godzinach 9:00–17:00. Czas wizyty: 30–60 minut zal
     icon: Star,
     title: 'System VEKA',
     description: 'Pracujemy wyłącznie na sprawdzonych profilach VEKA — europejskiego lidera jakości.',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+    image: '/images/feat_veka.jpg',
     content: `**VEKA** to największy producent profili okiennych PCV na świecie — firma z ponad 50-letnią tradycją, z centralą w Niemczech. Wybieramy VEKA bo to po prostu najlepsze profile dostępne na rynku.
 
 **Dlaczego VEKA:**
@@ -54,7 +54,7 @@ Każde okno opuszczające nasz salon ma certyfikat producenta i pełną dokument
     icon: Wrench,
     title: 'Montaż w cenie',
     description: 'Kompleksowa usługa: sprzedaż, transport i profesjonalny montaż w jednej cenie.',
-    image: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80',
+    image: '/images/feat_montaz.jpg',
     content: `U nas nie ma ukrytych kosztów. Cena okna to cena kompleksowej usługi — **od pomiaru do gotowego, sprawdzonego montażu**.
 
 **Co wchodzi w cenę:**
@@ -77,7 +77,7 @@ Pracujemy zgodnie z normą PN-B-13079. Stosujemy wyłącznie profesjonalne mater
     icon: Truck,
     title: 'Szybka realizacja',
     description: 'Standardowe okna gotowe w 3–4 tygodnie. Ekspresowa realizacja na życzenie.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    image: '/images/feat_realizacja.jpg',
     content: `Rozumiemy, że budowa lub remont nie może czekać w nieskończoność. Dlatego stawiamy na **krótkie terminy realizacji** bez kompromisów w jakości.
 
 **Standardowe terminy:**
@@ -97,6 +97,41 @@ Pracujemy zgodnie z normą PN-B-13079. Stosujemy wyłącznie profesjonalne mater
     bullets: ['Biały PCV: 3–4 tygodnie', 'Realizacja ekspresowa możliwa', 'Pisemne potwierdzenie terminu', 'SMS o gotowości', 'Montaż 1-dniowy'],
   },
 ];
+
+function renderInline(text: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+    const m = part.match(/^\*\*([^*]+)\*\*$/);
+    return m ? <strong key={i} className="font-semibold text-gray-800">{m[1]}</strong> : <span key={i}>{part}</span>;
+  });
+}
+
+function renderContent(text: string): ReactNode[] {
+  return text.split('\n').map((line, i) => {
+    if (!line.trim()) return <div key={i} className="h-2" />;
+    if (/^\*\*(.+)\*\*$/.test(line.trim())) {
+      const m = line.trim().match(/^\*\*(.+)\*\*$/)!;
+      return <p key={i} className="font-bold text-gray-800 mt-3 mb-1">{m[1]}</p>;
+    }
+    if (/^- /.test(line.trim())) {
+      return (
+        <div key={i} className="flex gap-2 ml-2">
+          <span className="shrink-0 mt-1 text-[#c0392b]">•</span>
+          <span>{renderInline(line.trim().slice(2))}</span>
+        </div>
+      );
+    }
+    if (/^\d+\. /.test(line.trim())) {
+      const m = line.trim().match(/^(\d+)\. (.+)/)!;
+      return (
+        <div key={i} className="flex gap-2 ml-2">
+          <span className="shrink-0 font-bold text-[#c0392b]">{m[1]}.</span>
+          <span>{renderInline(m[2])}</span>
+        </div>
+      );
+    }
+    return <p key={i}>{renderInline(line)}</p>;
+  });
+}
 
 function FeatureModal({ feature, onClose }: { feature: typeof features[0]; onClose: () => void }) {
   const Icon = feature.icon;
@@ -152,8 +187,8 @@ function FeatureModal({ feature, onClose }: { feature: typeof features[0]; onClo
             ))}
           </div>
 
-          <div className="border-t border-gray-100 pt-5 text-sm text-gray-600 leading-relaxed space-y-3 whitespace-pre-line">
-            {feature.content}
+          <div className="border-t border-gray-100 pt-5 text-sm text-gray-600 leading-relaxed space-y-1">
+            {renderContent(feature.content)}
           </div>
 
           <div className="mt-8 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center gap-4" style={{ background: '#f0f5fa' }}>
