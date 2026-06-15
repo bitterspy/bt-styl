@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { LogoSVG } from './Logo';
 import Image from 'next/image';
 
 const ofertaLinks = [
@@ -69,18 +70,9 @@ export default function Navbar() {
           <a
             href="#"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-3"
+            className="flex items-center"
           >
-            <Image
-              src="/images/logo-bt-styl.png"
-              alt="BT-Styl"
-              width={68}
-              height={68}
-              className={`transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`}
-            />
-            <span className={`text-xs font-medium hidden sm:block transition-colors ${scrolled ? 'text-[#7a5a3a]' : 'text-white/80'}`}>
-              Salon Firmowy AdamS
-            </span>
+            <LogoSVG variant="color" width={200} />
           </a>
 
           {/* Desktop nav */}
