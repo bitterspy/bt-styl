@@ -80,8 +80,10 @@ export default function Navbar() {
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
     setMegaOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   };
 
   return (
