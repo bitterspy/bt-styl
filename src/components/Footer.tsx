@@ -35,6 +35,12 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <h4 className="font-bold mt-6 mb-3 text-sm tracking-wide uppercase" style={{ color: '#e8a020' }}>Firma</h4>
+            <ul className="space-y-2 text-sm text-blue-200">
+              <li><a href="/marka" className="hover:text-white transition-colors">Materiały reklamowe</a></li>
+              <li><a href="#porady" className="hover:text-white transition-colors">Porady i poradniki</a></li>
+              <li><a href="#realizacje" className="hover:text-white transition-colors">Realizacje</a></li>
+            </ul>
           </div>
 
           {/* Contact */}

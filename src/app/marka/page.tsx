@@ -86,9 +86,16 @@ function CardFront() {
       <div style={{ position: 'absolute', bottom: 0, right: 0, width: 80, height: 80, borderRadius: '50% 0 0 0', background: GOLD, opacity: 0.08 }} />
       <div style={{ padding: '22px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', boxSizing: 'border-box' }}>
         <LogoWhite w={190} />
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ color: '#fff', fontFamily: 'Georgia, serif', fontSize: 14, fontWeight: 700 }}>Bogdan Tymofijewicz</div>
-          <div style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Arial, sans-serif', fontSize: 10, marginTop: 2, letterSpacing: 1 }}>WŁAŚCICIEL / DORADCA</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {['Okna PCV', 'Drzwi', 'Rolety'].map(t => (
+              <span key={t} style={{ fontSize: 8.5, fontFamily: 'Arial, sans-serif', color: GOLD, border: `1px solid ${GOLD}`, borderRadius: 999, padding: '2px 8px', letterSpacing: 1 }}>{t}</span>
+            ))}
+          </div>
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ color: '#fff', fontFamily: 'Georgia, serif', fontSize: 13, fontWeight: 700 }}>Bogdan Tymofijewicz</div>
+            <div style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Arial, sans-serif', fontSize: 9, marginTop: 2, letterSpacing: 1 }}>WŁAŚCICIEL / DORADCA</div>
+          </div>
         </div>
       </div>
     </div>
@@ -136,10 +143,27 @@ function Letterhead() {
         </div>
       </div>
       {/* miejsce na treść */}
-      <div style={{ padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {[100, 100, 100, 60, 100, 100, 80, 100, 100, 45, 100, 100, 70].map((w, i) => (
-          <div key={i} style={{ height: 7, background: '#f0f0f0', borderRadius: 4, width: `${w}%` }} />
-        ))}
+      <div style={{ padding: '20px 32px 60px', fontSize: 11, color: '#333', lineHeight: 1.9 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20, fontSize: 10, color: '#888' }}>
+          <span>Szczecin, dnia ...................</span>
+          <span>Nr oferty: ...................</span>
+        </div>
+        <p style={{ fontWeight: 700, color: NAVY, marginBottom: 6 }}>Szanowni Państwo,</p>
+        <p style={{ marginBottom: 10 }}>
+          W odpowiedzi na Państwa zapytanie, z przyjemnością przedstawiamy ofertę na dostawę i montaż stolarki okiennej
+          oraz drzwiowej w systemie <strong>VEKA</strong> — jednego z najbardziej renomowanych producentów profili PCV w Europie.
+        </p>
+        <p style={{ marginBottom: 10 }}>
+          Jako <strong>Autoryzowany Salon Firmowy AdamS</strong> w Szczecinie, oferujemy pełen zakres usług:
+          bezpłatny pomiar, dobór systemu, produkcję, transport oraz profesjonalny montaż zgodny z normą PN-B-13079.
+        </p>
+        <p style={{ marginBottom: 20 }}>
+          Wszystkie okna objęte są gwarancją producenta oraz 2-letnią gwarancją na montaż.
+          Zapraszamy do salonu lub kontaktu telefonicznego w celu omówienia szczegółów.
+        </p>
+        <p>Z poważaniem,</p>
+        <p style={{ fontWeight: 700, color: NAVY, marginTop: 4 }}>Bogdan Tymofijewicz</p>
+        <p style={{ fontSize: 10, color: '#aaa' }}>Właściciel · BT-Styl Salon Firmowy AdamS</p>
       </div>
       {/* stopka */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #eee', background: '#fff' }}>
