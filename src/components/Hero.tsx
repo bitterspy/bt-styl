@@ -30,18 +30,11 @@ export default function Hero() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Ciemny overlay — prawa strona dla czytelności tekstu */}
+        {/* Dark overlay gradient for text readability */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(to left, rgba(10,25,45,0.75) 0%, rgba(10,25,45,0.55) 40%, rgba(10,25,45,0) 65%)',
-          }}
-        />
-        {/* Mgła — biała od lewej, zanika w połowie ekranu */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 60%)',
+            background: 'linear-gradient(to right, rgba(10,25,45,0.88) 0%, rgba(10,25,45,0.65) 50%, rgba(10,25,45,0.3) 100%)',
           }}
         />
       </div>

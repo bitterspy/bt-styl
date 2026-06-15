@@ -181,7 +181,7 @@ function FeatureModal({ feature, onClose }: { feature: typeof features[0]; onClo
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
             {feature.bullets.map((b) => (
               <div key={b} className="flex items-center gap-2 text-sm text-gray-700">
-                <CheckCircle2 size={15} className="shrink-0" style={{ color: '#c0392b' }} />
+                <CheckCircle2 size={15} className="shrink-0" style={{ color: '#16a34a' }} />
                 {b}
               </div>
             ))}
