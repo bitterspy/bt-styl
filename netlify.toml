@@ -1,6 +1,7 @@
+# Static export — Next.js builds plain HTML/CSS/JS into out/.
+# No @netlify/plugin-nextjs here: that plugin wraps the site in a server
+# handler, which this site does not use (next.config.ts sets output: 'export').
+
 [build]
   command = "npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  publish = "out"
