@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, Copy, Check } from 'lucide-react';
+import { Download, Copy, Check, ArrowLeft } from 'lucide-react';
 
 const NAVY = '#1a3a5c';
 const GOLD = '#e8a020';
@@ -183,7 +183,27 @@ export default function MarkaPage() {
     <div style={{ minHeight: '100vh', background: '#f4f4f2', fontFamily: 'Arial, sans-serif' }}>
 
       {/* Hero */}
-      <div style={{ background: NAVY, padding: '56px 24px 48px', textAlign: 'center' }}>
+      <div style={{ background: NAVY, padding: '56px 24px 48px', textAlign: 'center', position: 'relative' }}>
+        <a
+          href="/"
+          style={{
+            position: 'absolute',
+            top: 20,
+            left: 20,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            background: 'rgba(255,255,255,0.12)',
+            color: '#fff',
+            textDecoration: 'none',
+            borderRadius: 999,
+            padding: '8px 16px',
+            fontSize: 12,
+            fontWeight: 700,
+          }}
+        >
+          <ArrowLeft size={14} /> Strona główna
+        </a>
         <a href="/" style={{ display: 'inline-block', cursor: 'pointer' }}>
           <LogoWhite w={280} />
         </a>
