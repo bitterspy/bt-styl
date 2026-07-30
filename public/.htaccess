@@ -1,0 +1,55 @@
+# BT-Styl — konfiguracja Apache dla hostingu współdzielonego (Hostido).
+# Ten plik jest w public/, więc Next.js kopiuje go do out/ przy każdym buildzie.
+
+# ── Strona błędu 404 ────────────────────────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── Wymuszenie HTTPS ────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── Kompresja ───────────────────────────────────────────────────────────────
+# WebP/JPEG/PNG są już skompresowane — nie ma sensu ich pakować ponownie.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ── Cache przeglądarki ──────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Pliki w _next/static/ mają hash w nazwie — mogą leżeć w cache rok.
+  <FilesMatch "\.(js|css|woff2)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, immutable"
+  </FilesMatch>
+
+  # Zdjęcia: miesiąc. Przy podmianie zmienia się nazwa pliku.
+  <FilesMatch "\.(webp|jpg|jpeg|png|svg|ico)$">
+    ExpiresDefault "access plus 1 month"
+  </FilesMatch>
+
+  # HTML nie może siedzieć w cache — inaczej zmiany treści nie dotrą.
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ── Typ MIME dla WebP ───────────────────────────────────────────────────────
+# Starsze konfiguracje Apache czasem go nie znają.
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+
+# ── Blokada dostępu do plików źródłowych ────────────────────────────────────
+# Nie blokujemy .json ani .txt — Next.js generuje w out/ pliki .txt
+# (RSC payload) i mogą być potrzebne przy nawigacji.
+<FilesMatch "\.(env|md|toml|tsx?)$">
+  Require all denied
+</FilesMatch>
