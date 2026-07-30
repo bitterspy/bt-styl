@@ -1,15 +1,37 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { X, ZoomIn } from 'lucide-react';
 import { realizacje } from '@/lib/data';
 
+const PER_PAGE = 16;
+const PAGES = Math.ceil(realizacje.length / PER_PAGE);
+
 export default function Realizacje() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [lightbox, setLightbox] = useState<null | { src: string; alt: string }>(null);
+  const [page, setPage] = useState(0);
+
+  const visible = realizacje.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
+
+  // Escape closes the lightbox.
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
+
+  function goToPage(next: number) {
+    setPage(next);
+    // Jump back to the gallery heading so the new page starts at the top.
+    document.getElementById('realizacje')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   return (
     <section id="realizacje" ref={ref} className="py-20 bg-white">
@@ -29,16 +51,19 @@ export default function Realizacje() {
           <p className="mt-3 text-gray-600 max-w-xl mx-auto">
             Ponad 500 zrealizowanych montaży w Szczecinie i okolicach. Każdy projekt wykonany z najwyższą starannością.
           </p>
+          <p className="mt-2 text-sm text-gray-500">
+            {realizacje.length} zdjęć &middot; strona {page + 1} z {PAGES}
+          </p>
         </motion.div>
 
         {/* Masonry gallery */}
         <div className="masonry-grid">
-          {realizacje.map((item, i) => (
+          {visible.map((item, i) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.5, delay: Math.min(i, 8) * 0.06 }}
               className="masonry-item"
             >
               <button
@@ -49,8 +74,9 @@ export default function Realizacje() {
                 <Image
                   src={item.src}
                   alt={item.alt}
-                  width={400}
-                  height={300}
+                  width={item.width}
+                  height={item.height}
+                  loading={page === 0 && i < 6 ? 'eager' : 'lazy'}
                   className="w-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 50vw, 33vw"
                 />
@@ -64,6 +90,43 @@ export default function Realizacje() {
             </motion.div>
           ))}
         </div>
+
+        {/* Pagination */}
+        <nav className="mt-10 flex items-center justify-center gap-2" aria-label="Strony galerii">
+          <button
+            onClick={() => goToPage(page - 1)}
+            disabled={page === 0}
+            className="px-4 py-2 rounded-lg text-sm font-semibold border transition-colors disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+            style={{ borderColor: '#d5dbe3', color: '#1a3a5c' }}
+          >
+            Poprzednia
+          </button>
+
+          {Array.from({ length: PAGES }, (_, n) => (
+            <button
+              key={n}
+              onClick={() => goToPage(n)}
+              aria-current={n === page ? 'page' : undefined}
+              className="w-10 h-10 rounded-lg text-sm font-bold border transition-colors"
+              style={
+                n === page
+                  ? { background: '#1a3a5c', borderColor: '#1a3a5c', color: '#fff' }
+                  : { borderColor: '#d5dbe3', color: '#1a3a5c' }
+              }
+            >
+              {n + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => goToPage(page + 1)}
+            disabled={page === PAGES - 1}
+            className="px-4 py-2 rounded-lg text-sm font-semibold border transition-colors disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+            style={{ borderColor: '#d5dbe3', color: '#1a3a5c' }}
+          >
+            Następna
+          </button>
+        </nav>
       </div>
 
       {/* Lightbox */}

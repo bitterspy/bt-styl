@@ -9,12 +9,39 @@ export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm({ name: '', email: '', phone: '', message: '' });
+    setSending(true);
+    setError('');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          subject: `Zapytanie ze strony BT-Styl — ${form.name}`,
+          from_name: 'Strona BT-Styl',
+          ...form,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setForm({ name: '', email: '', phone: '', message: '' });
+      } else {
+        setError('Nie udało się wysłać wiadomości. Zadzwoń do nas lub spróbuj ponownie.');
+      }
+    } catch {
+      setError('Brak połączenia. Sprawdź internet lub zadzwoń do nas.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -173,13 +200,20 @@ export default function Contact() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-sm text-red-600 text-center bg-red-50 rounded-xl py-2.5 px-3">
+                        {error}
+                      </p>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-white transition-all hover:opacity-90 hover:scale-[1.01]"
+                      disabled={sending}
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-white transition-all hover:opacity-90 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                       style={{ background: '#1a3a5c' }}
                     >
                       <Send size={16} />
-                      Wyślij zapytanie
+                      {sending ? 'Wysyłanie...' : 'Wyślij zapytanie'}
                     </button>
 
                     <p className="text-xs text-gray-400 text-center">

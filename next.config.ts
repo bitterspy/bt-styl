@@ -1,7 +1,13 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // Static export — builds to `out/`, deployable to any shared hosting via FTP.
+  output: 'export',
+  // Emits `/marka/index.html` so Apache serves subpages without rewrite rules.
+  trailingSlash: true,
   images: {
+    // Image optimization needs a server; static export must serve images as-is.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

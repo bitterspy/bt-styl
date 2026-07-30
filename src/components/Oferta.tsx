@@ -162,7 +162,7 @@ const drzwiTarasowe = [
     tagline: 'Narożne przeszklenie – architektura bez granic',
     description: 'Innowacyjny system przesuwno-uchylny łączący design południowej Europy z energooszczędnością standardów północnych. Umożliwia pełne przeszklenie narożne bez słupka.',
     features: ['Uw = 0,68 W/(m²K)', 'Szczelność klasa 8A', 'Odporność na wiatr C2', 'Okucie SIEGENIA HST Portal do 400kg', 'Opcja napędu elektrycznego MHS'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2019/10/hst_corner_view.jpg',
+    image: '/images/oferta/hst_corner_view.jpg',
   },
   {
     id: 2, badge: null,
@@ -170,7 +170,7 @@ const drzwiTarasowe = [
     tagline: 'Dom pasywny – maksymalna energooszczędność',
     description: 'Drzwi unoszono-przesuwne przeznaczone dla domów pasywnych i zeroenergetycznych. Głęboka zabudowa z pakietami Ug=0,5 lub 0,6 W/m²K.',
     features: ['Ug = 0,5 lub 0,6 W/m²K', 'Szczelność klasa 8A (450 Pa)', 'Szer. do 6000mm, wys. do 2500mm', 'Każdy kolor RAL', 'System Aluplast'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2019/10/hst_passiv_front.jpg',
+    image: '/images/oferta/hst_passiv_front.jpg',
   },
   {
     id: 3, badge: null,
@@ -178,7 +178,7 @@ const drzwiTarasowe = [
     tagline: 'Solidna podstawa – sprawdzony system HST',
     description: 'Klasyczne drzwi unoszono-przesuwne HST. Skrzydło unosi się przed przesunięciem — zero oporu, cichy bieg, doskonała szczelność. Wiele konfiguracji otwarcia.',
     features: ['Niski próg', 'Cichy bieg', 'Wiele schematów otwarcia', 'Doskonała szczelność', 'System AdamS/VEKA'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2019/10/HST_Basic.png',
+    image: '/images/oferta/HST_Basic.png',
   },
   {
     id: 4, badge: null,
@@ -186,7 +186,7 @@ const drzwiTarasowe = [
     tagline: 'Slim Look + HST – elegancja i funkcjonalność',
     description: 'System HST na profilu SOFTLINE 82mm. Płaski próg, układ uszczelek klasy huraganowej, 3-szybowe oszklenie. Idealne do nowych domów energooszczędnych i renowacji.',
     features: ['Profil SOFTLINE 82mm', 'Niski płaski próg', 'Szczelność huraganowa', '3-szybowe oszklenie', 'Nowe budownictwo i renowacje'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2019/10/schemat-a.png',
+    image: '/images/oferta/schemat-a.png',
   },
   {
     id: 5, badge: 'NOWOŚĆ',
@@ -194,7 +194,7 @@ const drzwiTarasowe = [
     tagline: 'Nowoczesna alternatywa dla PSK i patio',
     description: 'Zaawansowane drzwi przesuwne dla domów i obiektów użyteczności publicznej. Skrzydło do 1,5×2,3m. Intuicyjny mechanizm, oszczędność miejsca — brak potrzeby rozwarcia w głąb pomieszczenia.',
     features: ['Skrzydło do 1,5×2,3m', 'Oszczędność miejsca', 'Intuicyjny mechanizm', 'Domy i obiekty użyteczności publicznej', 'Alternatywa PSK/PATIO'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2019/10/smart_slide.png',
+    image: '/images/oferta/smart_slide.png',
   },
 ];
 
@@ -216,7 +216,7 @@ const rolety = [
     tagline: 'Montaż na nowym oknie – izolacja i ochrona',
     description: 'System CleverBox montowany na nowych oknach. Wielofunkcyjna ochrona: słońce, wiatr, deszcz, śnieg. Izolacja termiczna USb ≥ 0,61 W/(m²K), akustyczna Rw ≤ 39 dB. 25 kolorów.',
     features: ['USb ≥ 0,61 W/(m²K)', 'Rw ≤ 39 dB', '25 wariantów kolorystycznych', 'Napęd automatyczny opcja', 'Moskitiera rolowana opcja', 'Certyfikat IfT Rosenheim'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2016/03/SPE_MKT-kopia-1.jpg',
+    image: '/images/oferta/SPE_MKT-kopia-1.jpg',
   },
   {
     id: 2, badge: null,
@@ -224,7 +224,7 @@ const rolety = [
     tagline: 'Retrofit – idealne do istniejących budynków',
     description: 'Systemy SK 45, SKP, SKO, SKO-P — skrzynka aluminiowa mocowana na ścianie lub w ościeżnicy. Sprawdzona technika rolet w nowoczesnej, elegancko zaokrąglonej obudowie.',
     features: ['Systemy: SK 45 / SKP / SKO / SKO-P', 'Montaż na gotowym budynku', 'Zaokrąglona skrzynka aluminiowa', 'Prowadnica aluminiowa', 'Szeroka gama kolorów'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2016/03/SKO-kopia.jpg',
+    image: '/images/oferta/SKO-kopia.jpg',
   },
   {
     id: 3, badge: 'HIT',
@@ -232,7 +232,7 @@ const rolety = [
     tagline: 'Niewidoczna skrzynka – najwyższa estetyka',
     description: 'Rolety podtynkowe SP i SP-E montowane w warstwie ocieplenia budynku. Skrzynka całkowicie ukryta w ścianie — czysta elewacja, maksymalna estetyka.',
     features: ['Skrzynka w ociepleniu', 'SP oraz SP-E (z moskitierą)', 'Czysta elewacja', 'Integracja z budynkiem', 'System Aluprof'],
-    image: 'https://dobreoknaszczecin.pl/wp-content/uploads/2016/03/SP-kopia-1.jpg',
+    image: '/images/oferta/SP-kopia-1.jpg',
   },
 ];
 

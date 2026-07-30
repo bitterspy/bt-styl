@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BT-Styl
 
-## Getting Started
+Marketing website for BT-Styl — a window retailer based in Szczecin, Poland.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) with **static export** — no server required
+- **React 19** + **TypeScript**
+- **Tailwind CSS 4**
+- **framer-motion** (scroll animations), **lucide-react** (icons)
+- **Web3Forms** — contact form delivery (no backend)
+
+The site builds to plain HTML/CSS/JS in `out/`, deployable to any shared
+hosting over FTP. There is no database, no API routes, and no Node.js runtime
+in production.
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in NEXT_PUBLIC_WEB3FORMS_KEY
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Required | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | yes, for the contact form | Web3Forms access key. Free at [web3forms.com](https://web3forms.com) — enter the recipient address and the key arrives by e-mail. Public by design: it only permits submitting the form, never reading past submissions. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Without the key the form renders and validates but submissions fail with an
+error message. Everything else works.
 
-## Learn More
+## Build & deploy
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build   # outputs to out/
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Upload the **contents** of `out/` to the hosting document root (usually
+`public_html/`). No build step runs on the server.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `../SETUP.md` for step-by-step deployment instructions.
 
-## Deploy on Vercel
+## Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/
+│   ├── layout.tsx          # root layout, metadata, JSON-LD
+│   ├── page.tsx            # homepage — composes the sections below
+│   ├── marka/page.tsx      # brand guidelines page
+│   └── logo-preview/       # internal logo preview (exclude before launch)
+├── components/
+│   ├── Navbar.tsx  Hero.tsx  Oferta.tsx  Products.tsx
+│   ├── Features.tsx  WhyUs.tsx  Realizacje.tsx  Partners.tsx
+│   ├── Testimonials.tsx  Porady.tsx  Contact.tsx  Footer.tsx
+│   ├── Logo.tsx  BackToTop.tsx
+└── lib/data.ts             # site content: contact details, products, copy
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Editable copy lives in `src/lib/data.ts` and inside the section components.
+
+## Static export constraints
+
+Because `output: 'export'` is set, these Next.js features are unavailable:
+Server Actions, Route Handlers reading requests, middleware, `redirects`/
+`rewrites`/`headers` config, ISR, and `next/image` optimization
+(`images.unoptimized: true` is required). Images ship at their source
+resolution — compress them before adding to `public/`.
+
+`trailingSlash: true` makes each route emit `<route>/index.html`, so Apache
+serves subpages without rewrite rules.
