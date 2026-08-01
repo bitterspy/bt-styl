@@ -134,7 +134,7 @@ const okna = [
     name: 'AdamS VEKA SL 82',
     tagline: 'Slim Look – więcej światła, mniej profilu',
     description: 'Smukłe profile 82mm z efektem Slim Look. Minimalistyczna rama optycznie powiększa okno i wpuszcza maksimum naturalnego światła dziennego.',
-    features: ['Slim Look 82mm', 'Max. światło dzienne', 'Minimalistyczny design', 'System VEKA'],
+    features: ['Slim Look 82mm', 'Max. światło dzienne', 'Minimalistyczny design', 'System VEKA', 'Gwarancja'],
     image: '/images/produkty/veka_sl_82.jpg',
   },
   {
@@ -142,7 +142,7 @@ const okna = [
     name: 'AdamS VEKA PF 70',
     tagline: 'Sprawdzony klasyk – niezawodny wybór',
     description: 'Klasyczny system 5-komorowy 70mm. Sprawdzony w tysiącach polskich domów. Szeroka dostępność kolorów i kształtów w przystępnej cenie.',
-    features: ['5 komór', '70mm głębokość', '100+ kolorów', 'System VEKA'],
+    features: ['5 komór', '70mm głębokość', '100+ kolorów', 'System VEKA', 'Gwarancja'],
     image: '/images/produkty/veka_pf_70.jpg',
   },
   {
@@ -150,7 +150,7 @@ const okna = [
     name: 'AdamS IDEAL 8000',
     tagline: 'Przełom – 8 komór, Uw ≤ 0,68 W/(m²K)',
     description: 'Innowacyjna konstrukcja 8-komorowa. Najlepsza izolacja akustyczna i termiczna w klasie. Dla wymagających inwestorów i budynków premium.',
-    features: ['8 komór', 'Uw ≤ 0,68 W/(m²K)', 'Izolacja akustyczna', 'Premium'],
+    features: ['8 komór', 'Uw ≤ 0,68 W/(m²K)', 'Izolacja akustyczna', 'Premium', 'Gwarancja'],
     image: '/images/produkty/ideal_8000.jpg',
   },
   {
@@ -166,7 +166,7 @@ const okna = [
     name: 'AdamS ELEGANT COMFORT-LINE',
     tagline: 'Prosta elegancja – design klasy premium',
     description: 'Najwyższa półka estetyki z profili VEKA. Proste linie, perfekcyjne wykończenie. Dla tych, dla których wygląd jest tak samo ważny jak parametry.',
-    features: ['Premium design', 'Proste linie', 'Antykorozyjność', 'System VEKA'],
+    features: ['Premium design', 'Proste linie', 'Antykorozyjność', 'System VEKA', 'Gwarancja'],
     image: '/images/produkty/elegant_comfort_line.webp',
   },
 ];
@@ -177,7 +177,7 @@ const drzwiTarasowe = [
     name: 'HST CORNER VIEW',
     tagline: 'Narożne przeszklenie – architektura bez granic',
     description: 'Innowacyjny system przesuwno-uchylny łączący design południowej Europy z energooszczędnością standardów północnych. Umożliwia pełne przeszklenie narożne bez słupka.',
-    features: ['Uw = 0,68 W/(m²K)', 'Szczelność klasa 8A', 'Odporność na wiatr C2', 'Okucie SIEGENIA HST Portal do 400kg', 'Opcja napędu elektrycznego MHS'],
+    features: ['Uw = 0,68 W/(m²K)', 'Szczelność klasa 8A', 'Odporność na wiatr C2', 'Okucie SIEGENIA HST Portal do 400kg', 'Gwarancja'],
     image: '/images/oferta/hst_corner_view.jpg',
   },
   {
@@ -185,7 +185,7 @@ const drzwiTarasowe = [
     name: 'HST PASSIV',
     tagline: 'Dom pasywny – maksymalna energooszczędność',
     description: 'Drzwi unoszono-przesuwne przeznaczone dla domów pasywnych i zeroenergetycznych. Głęboka zabudowa z pakietami Ug=0,5 lub 0,6 W/m²K.',
-    features: ['Ug = 0,5 lub 0,6 W/m²K', 'Szczelność klasa 8A (450 Pa)', 'Szer. do 6000mm, wys. do 2500mm', 'Każdy kolor RAL', 'System Aluplast'],
+    features: ['Ug = 0,5 lub 0,6 W/m²K', 'Szczelność klasa 8A (450 Pa)', 'Szer. do 6000mm, wys. do 2500mm', 'Każdy kolor RAL', 'Gwarancja'],
     image: '/images/oferta/hst_passiv_front.jpg',
   },
   {
@@ -193,7 +193,7 @@ const drzwiTarasowe = [
     name: 'HST BASIC',
     tagline: 'Solidna podstawa – sprawdzony system HST',
     description: 'Klasyczne drzwi unoszono-przesuwne HST. Skrzydło unosi się przed przesunięciem — zero oporu, cichy bieg, doskonała szczelność. Wiele konfiguracji otwarcia.',
-    features: ['Niski próg', 'Cichy bieg', 'Wiele schematów otwarcia', 'Doskonała szczelność', 'System AdamS/VEKA'],
+    features: ['Niski próg', 'Cichy bieg', 'Wiele schematów otwarcia', 'Doskonała szczelność', 'Gwarancja'],
     image: '/images/oferta/HST_Basic.png',
   },
   {
@@ -201,7 +201,7 @@ const drzwiTarasowe = [
     name: 'HST SL 82',
     tagline: 'Slim Look + HST – elegancja i funkcjonalność',
     description: 'System HST na profilu SOFTLINE 82mm. Płaski próg, układ uszczelek klasy huraganowej, 3-szybowe oszklenie. Idealne do nowych domów energooszczędnych i renowacji.',
-    features: ['Profil SOFTLINE 82mm', 'Niski płaski próg', 'Szczelność huraganowa', '3-szybowe oszklenie', 'Nowe budownictwo i renowacje'],
+    features: ['Profil SOFTLINE 82mm', 'Niski płaski próg', 'Szczelność huraganowa', '3-szybowe oszklenie', 'Gwarancja'],
     image: '/images/oferta/schemat-a.png',
   },
   {
@@ -209,7 +209,7 @@ const drzwiTarasowe = [
     name: 'SMART-SLIDE',
     tagline: 'Nowoczesna alternatywa dla PSK i patio',
     description: 'Zaawansowane drzwi przesuwne dla domów i obiektów użyteczności publicznej. Skrzydło do 1,5×2,3m. Intuicyjny mechanizm, oszczędność miejsca — brak potrzeby rozwarcia w głąb pomieszczenia.',
-    features: ['Skrzydło do 1,5×2,3m', 'Oszczędność miejsca', 'Intuicyjny mechanizm', 'Domy i obiekty użyteczności publicznej', 'Alternatywa PSK/PATIO'],
+    features: ['Skrzydło do 1,5×2,3m', 'Oszczędność miejsca', 'Intuicyjny mechanizm', 'Domy i obiekty użyteczności publicznej', 'Gwarancja'],
     image: '/images/oferta/smart_slide.png',
   },
 ];
@@ -220,7 +220,7 @@ const drzwiZewnetrzne = [
     name: 'Zewnętrzne Drzwi Martom',
     tagline: 'Drzwi hybrydowe – lider rozwiązań łączących materiały',
     description: 'Drzwi stalowe marki Martom — lidera rozwiązań hybrydowych na polskim rynku. Opatentowana technologia łącząca drewno, stal, aluminium oraz zbrojone włóknem tworzywo ABS i piankę PUR. Bogata oferta modeli jedno- i dwuskrzydłowych, konkurencyjna cena.',
-    features: ['Technologia hybrydowa', 'Drewno + stal + aluminium + ABS', 'Wypełnienie pianą PUR', 'Modele jedno- i dwuskrzydłowe', 'Klasy odporności RC2 / RC3'],
+    features: ['Technologia hybrydowa', 'Drewno + stal + aluminium + ABS', 'Wypełnienie pianą PUR', 'Klasy odporności RC2 / RC3', 'Gwarancja'],
     image: '/images/realizacje/DSC_1240-300x145.jpg',
   },
 ];
@@ -231,7 +231,7 @@ const rolety = [
     name: 'Rolety Nadstawne CleverBox',
     tagline: 'Montaż na nowym oknie – izolacja i ochrona',
     description: 'System CleverBox montowany na nowych oknach. Wielofunkcyjna ochrona: słońce, wiatr, deszcz, śnieg. Izolacja termiczna USb ≥ 0,61 W/(m²K), akustyczna Rw ≤ 39 dB. 25 kolorów.',
-    features: ['USb ≥ 0,61 W/(m²K)', 'Rw ≤ 39 dB', '25 wariantów kolorystycznych', 'Napęd automatyczny opcja', 'Moskitiera rolowana opcja', 'Certyfikat IfT Rosenheim'],
+    features: ['USb ≥ 0,61 W/(m²K)', 'Rw ≤ 39 dB', '25 wariantów kolorystycznych', 'Napęd automatyczny opcja', 'Certyfikat IfT Rosenheim', 'Gwarancja'],
     image: '/images/oferta/SPE_MKT-kopia-1.jpg',
   },
   {
@@ -239,7 +239,7 @@ const rolety = [
     name: 'Rolety Zewnętrzne Adaptacyjne',
     tagline: 'Retrofit – idealne do istniejących budynków',
     description: 'Systemy SK 45, SKP, SKO, SKO-P — skrzynka aluminiowa mocowana na ścianie lub w ościeżnicy. Sprawdzona technika rolet w nowoczesnej, elegancko zaokrąglonej obudowie.',
-    features: ['Systemy: SK 45 / SKP / SKO / SKO-P', 'Montaż na gotowym budynku', 'Zaokrąglona skrzynka aluminiowa', 'Prowadnica aluminiowa', 'Szeroka gama kolorów'],
+    features: ['Systemy: SK 45 / SKP / SKO / SKO-P', 'Montaż na gotowym budynku', 'Zaokrąglona skrzynka aluminiowa', 'Prowadnica aluminiowa', 'Gwarancja'],
     image: '/images/oferta/SKO-kopia.jpg',
   },
   {
@@ -247,7 +247,7 @@ const rolety = [
     name: 'Rolety Integro (Podtynkowe)',
     tagline: 'Niewidoczna skrzynka – najwyższa estetyka',
     description: 'Rolety podtynkowe SP i SP-E montowane w warstwie ocieplenia budynku. Skrzynka całkowicie ukryta w ścianie — czysta elewacja, maksymalna estetyka.',
-    features: ['Skrzynka w ociepleniu', 'SP oraz SP-E (z moskitierą)', 'Czysta elewacja', 'Integracja z budynkiem', 'System Aluprof'],
+    features: ['Skrzynka w ociepleniu', 'SP oraz SP-E (z moskitierą)', 'Czysta elewacja', 'Integracja z budynkiem', 'Gwarancja'],
     image: '/images/oferta/SP-kopia-1.jpg',
   },
 ];

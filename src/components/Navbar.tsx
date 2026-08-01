@@ -149,22 +149,14 @@ export default function Navbar() {
           </ul>
 
           {/* CTA phone */}
-          <div className="hidden md:flex flex-col items-end gap-0.5">
-            <a
-              href="tel:+48914540999"
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
-              style={{ background: '#c0392b' }}
-            >
-              <Phone size={15} />
-              91 454-09-99
-            </a>
-            <a
-              href="tel:+48791370361"
-              className={`text-xs font-semibold transition-colors ${scrolled ? 'text-gray-500 hover:text-[#c0392b]' : 'text-white/80 hover:text-white'}`}
-            >
-              791 370-361
-            </a>
-          </div>
+          <a
+            href="tel:+48914540999"
+            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+            style={{ background: '#c0392b' }}
+          >
+            <Phone size={15} />
+            91 454-09-99
+          </a>
 
           {/* Mobile hamburger */}
           <button
@@ -246,12 +238,6 @@ export default function Navbar() {
                     style={{ background: '#c0392b' }}
                   >
                     <Phone size={15} /> 91 454-09-99
-                  </a>
-                  <a
-                    href="tel:+48791370361"
-                    className="flex items-center justify-center gap-2 py-2.5 rounded-full text-[#1a3a5c] font-semibold border border-gray-200"
-                  >
-                    <Phone size={15} /> 791 370-361
                   </a>
                 </li>
               </ul>

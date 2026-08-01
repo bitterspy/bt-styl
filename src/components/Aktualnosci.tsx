@@ -12,6 +12,7 @@ type Wpis = {
 };
 
 const API_URL = 'https://bt-styl.pl/backend/api.php';
+const FALLBACK_URL = '/data/aktualnosci.json';
 
 function formatujDate(iso: string) {
   const d = new Date(iso);
@@ -27,7 +28,12 @@ export default function Aktualnosci() {
     fetch(API_URL)
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data) => setWpisy(data))
-      .catch(() => setWpisy([]));
+      .catch(() =>
+        fetch(FALLBACK_URL)
+          .then((res) => (res.ok ? res.json() : Promise.reject()))
+          .then((data) => setWpisy(data))
+          .catch(() => setWpisy([]))
+      );
   }, []);
 
   if (wpisy !== null && wpisy.length === 0) return null;

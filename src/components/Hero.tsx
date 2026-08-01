@@ -109,6 +109,14 @@ export default function Hero() {
               <Phone size={17} className="group-hover:animate-pulse" />
               91 454-09-99
             </a>
+            <a
+              href="tel:+48791370361"
+              className="group flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold transition-all hover:scale-105"
+              style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)' }}
+            >
+              <Phone size={17} className="group-hover:animate-pulse" />
+              791 370-361
+            </a>
           </motion.div>
 
           {/* Trust badges */}

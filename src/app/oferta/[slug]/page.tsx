@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle2, Phone } from 'lucide-react';
+import { ArrowLeft, Phone } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { oknaDetale, getOknoBySlug } from '@/lib/oknaDetale';
+import { getColorImage } from '@/lib/kolory';
 
 export function generateStaticParams() {
   return oknaDetale.map((o) => ({ slug: o.slug }));
@@ -92,16 +93,34 @@ export default async function OknoDetailPage({ params }: { params: Promise<{ slu
           {okno.kolory.length > 0 && (
             <div className="mb-4">
               <h2 className="text-xl font-bold mb-4" style={{ color: '#1a3a5c' }}>Dostępne kolory</h2>
-              <div className="flex flex-wrap gap-2">
-                {okno.kolory.map((kolor) => (
-                  <span
-                    key={kolor}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-gray-50 border border-gray-200 text-gray-700"
-                  >
-                    <CheckCircle2 size={12} style={{ color: '#c0392b' }} />
-                    {kolor}
-                  </span>
-                ))}
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                {okno.kolory.map((kolor) => {
+                  const img = getColorImage(kolor);
+                  return (
+                    <div
+                      key={kolor}
+                      title={kolor}
+                      className="group relative aspect-square rounded-xl overflow-hidden border border-gray-200 bg-gray-50 cursor-default"
+                    >
+                      {img ? (
+                        <Image
+                          src={img}
+                          alt={kolor}
+                          fill
+                          className="object-cover"
+                          sizes="120px"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[10px] text-gray-400 text-center p-1">
+                          {kolor}
+                        </div>
+                      )}
+                      <div className="absolute inset-x-0 bottom-0 bg-black/70 text-white text-[10px] leading-tight px-1.5 py-1 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        {kolor}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
