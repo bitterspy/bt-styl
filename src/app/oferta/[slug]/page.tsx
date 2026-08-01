@@ -28,7 +28,7 @@ export default async function OknoDetailPage({ params }: { params: Promise<{ slu
 
   return (
     <>
-      <Navbar />
+      <Navbar solid />
       <main className="pt-28 pb-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link

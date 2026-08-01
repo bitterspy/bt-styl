@@ -23,8 +23,9 @@ const navLinks: { href: string; label: string; hasMega?: boolean; external?: boo
   { href: '/marka', label: 'Do pobrania', external: true },
 ];
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({ solid = false }: { solid?: boolean }) {
+  const [scrolledState, setScrolled] = useState(false);
+  const scrolled = solid || scrolledState;
   const [menuOpen, setMenuOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOfertaOpen, setMobileOfertaOpen] = useState(false);
@@ -163,7 +164,7 @@ export default function Navbar() {
           {/* CTA phone */}
           <a
             href="tel:+48914540999"
-            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white whitespace-nowrap shrink-0 transition-all hover:scale-105 hover:shadow-lg"
             style={{ background: '#c0392b' }}
           >
             <Phone size={15} />
