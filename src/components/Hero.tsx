@@ -56,7 +56,7 @@ export default function Hero() {
             style={{ background: 'rgba(232,160,32,0.2)', border: '1px solid rgba(232,160,32,0.5)', color: '#f5c55a' }}
           >
             <Award size={13} />
-            AUTORYZOWANY DEALER ADAMS · SYSTEM VEKA
+            SALON FIRMOWY ADAMS · SYSTEM VEKA
           </motion.div>
 
           {/* Headline */}
@@ -81,7 +81,7 @@ export default function Hero() {
             variants={fadeUp}
             className="text-lg sm:text-xl text-blue-100 max-w-xl mb-10 leading-relaxed"
           >
-            Markowe okna PCV i aluminiowe na systemach VEKA. Drzwi tarasowe, rolety Aluprof.
+            Markowe okna PCV i aluminiowe na systemach VEKA, ALURON, ALUPROF. Drzwi tarasowe, rolety Aluprof.
             Salon w&nbsp;Szczecinie z&nbsp;25-letnim doświadczeniem.
           </motion.p>
 
@@ -120,7 +120,7 @@ export default function Hero() {
             className="flex flex-wrap gap-6 text-sm text-blue-100"
           >
             {[
-              { icon: <Shield size={16} />, text: 'Gwarancja 10 lat' },
+              { icon: <Shield size={16} />, text: 'Gwarancja' },
               { icon: <Clock size={16} />, text: 'Pomiar gratis' },
               { icon: <Award size={16} />, text: '25+ lat na rynku' },
             ].map((item) => (

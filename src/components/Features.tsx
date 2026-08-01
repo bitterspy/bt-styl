@@ -69,8 +69,8 @@ Każde okno opuszczające nasz salon ma certyfikat producenta i pełną dokument
 **Nasz standard montażu:**
 Pracujemy zgodnie z normą PN-B-13079. Stosujemy wyłącznie profesjonalne materiały montażowe: pianka Soudal, silikon neutralny, kołki rozporowe ze stali nierdzewnej.
 
-**Gwarancja na montaż:** 2 lata na usługę montażową, niezależnie od gwarancji producenta na okno.`,
-    bullets: ['Transport gratis', 'Demontaż starych okien', 'Norma PN-B-13079', 'Materiały Soudal', 'Gwarancja 2 lata na montaż'],
+**Gwarancja na montaż:** niezależnie od gwarancji producenta na okno.`,
+    bullets: ['Transport gratis', 'Demontaż starych okien', 'Norma PN-B-13079', 'Materiały Soudal', 'Gwarancja na montaż'],
   },
   {
     id: 'realizacja',

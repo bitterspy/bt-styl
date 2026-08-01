@@ -15,7 +15,7 @@ export default function Footer() {
               <LogoSVG variant="light" width={200} />
             </div>
             <p className="text-sm text-blue-200 leading-relaxed">
-              Autoryzowany dealer AdamS na systemach VEKA w Szczecinie.
+              Salon firmowy AdamS na systemach VEKA w Szczecinie.
               Okna PCV, drzwi, rolety. Ponad 25 lat doświadczenia.
             </p>
           </div>

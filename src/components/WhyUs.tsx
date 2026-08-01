@@ -55,6 +55,41 @@ export default function WhyUs() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto text-center mb-16"
+        >
+          <span className="text-xs font-bold tracking-widest uppercase" style={{ color: '#e8a020' }}>
+            O nas
+          </span>
+          <h2 className="mt-2 mb-6 text-3xl sm:text-4xl font-bold text-white">
+            Szanowni Państwo
+          </h2>
+          <div className="text-blue-100 text-sm sm:text-base leading-relaxed space-y-4 text-left">
+            <p>
+              Jest nam niezmiernie miło powitać Państwa w naszym serwisie internetowym, który poświęcony jest
+              stolarce okiennej i drzwiowej. Działania, jakie prowadzimy, skupiają się na dostarczaniu Państwu
+              najlepszych produktów od renomowanych polskich producentów. Lata doświadczeń to okres, kiedy
+              mogliśmy poznać specyfikę produktową oraz rzetelność poszczególnych firm, dlatego wybraliśmy
+              najlepszych dostawców, oferujących najwyższej klasy okna i drzwi.
+            </p>
+            <p>
+              Nasza oferta to markowe okna, drzwi oraz rolety w Szczecinie. Dzięki zróżnicowanemu asortymentowi
+              jesteśmy w stanie obsłużyć Państwa inwestycje kompleksowo, dostarczając produkty nietuzinkowe, o
+              wyrafinowanym wzornictwie. Pracę wykonujemy z pasją oraz w miłej atmosferze, w pełni angażując
+              nabyte doświadczenie, zapewniamy Państwu najlepsze rozwiązania.
+            </p>
+            <p>
+              Zapraszamy do naszego biura, celem zapoznania się z naszą ofertą. Poprzez prezentację produktów
+              poznamy Państwa oczekiwania, dzięki czemu indywidualnie dopasujemy ofertę. Nasz salon znajduje
+              się przy ulicy Bagiennej 6 w Szczecinie. Zapewniamy profesjonalny montaż oraz specjalistyczny
+              transport.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-16"
         >
           <span className="text-xs font-bold tracking-widest uppercase" style={{ color: '#e8a020' }}>
@@ -93,7 +128,7 @@ export default function WhyUs() {
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {[
-            { title: 'Autoryzowany dealer', desc: 'Certyfikowany partner AdamS i VEKA w Szczecinie' },
+            { title: 'Salon firmowy', desc: 'Certyfikowany partner AdamS i VEKA w Szczecinie' },
             { title: 'Kompleksowa obsługa', desc: 'Od projektu, przez pomiar, po montaż i serwis' },
             { title: 'Najlepsza jakość', desc: 'Tylko sprawdzone systemy od czołowych europejskich producentów' },
           ].map((item) => (

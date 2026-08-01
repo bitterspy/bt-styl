@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { Phone, CheckCircle2 } from 'lucide-react';
+import Link from 'next/link';
+import { Phone, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 30 },
@@ -19,7 +20,12 @@ const badgeColors: Record<string, string> = {
   HIT: '#c0392b',
 };
 
-function ProductCard({ product }: { product: typeof okna[0] }) {
+type Product = {
+  id: number; badge: string | null; name: string; tagline: string;
+  description: string; features: string[]; image: string; slug?: string;
+};
+
+function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col border border-gray-100">
       <div className="relative h-52 overflow-hidden bg-gray-50 flex items-center justify-center p-4">
@@ -51,6 +57,16 @@ function ProductCard({ product }: { product: typeof okna[0] }) {
             </li>
           ))}
         </ul>
+        {product.slug && (
+          <Link
+            href={`/oferta/${product.slug}/`}
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-semibold mb-2 transition-all hover:bg-gray-50"
+            style={{ color: '#1a3a5c', border: '1px solid #1a3a5c' }}
+          >
+            Zobacz szczegóły
+            <ArrowRight size={14} />
+          </Link>
+        )}
         <a
           href="tel:+48914540999"
           className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 mt-auto"
@@ -98,23 +114,23 @@ function Section({ id, title, subtitle, children, gray }: {
 
 const okna = [
   {
-    id: 1, badge: 'BESTSELLER',
+    id: 1, badge: 'BESTSELLER', slug: 'passiv-line-ultra',
     name: 'AdamS PASSIV-LINE ULTRA',
     tagline: 'Dom pasywny – Uw do 0,54 W/(m²K)',
     description: 'System 6-komorowy z dociepleniem, głębokość 85mm. Wklejane szyby Ug=0,3, wypełnienie pianą PU, wzmocnienia Ultradur BASF. Pakiet 3- lub 4-szybowy z kryptonem.',
-    features: ['Głębokość 85mm', 'Uw ≤ 0,54 W/(m²K)', '4-szybowy z kryptonem', 'Okucie SIEGENIA TITAN AF', 'Gwarancja 80 miesięcy'],
+    features: ['Głębokość 85mm', 'Uw ≤ 0,54 W/(m²K)', '4-szybowy z kryptonem', 'Okucie SIEGENIA TITAN AF', 'Gwarancja'],
     image: '/images/produkty/passiv_line_ultra.jpg',
   },
   {
-    id: 2, badge: 'POLECANY',
+    id: 2, badge: 'POLECANY', slug: 'passiv-line-plus',
     name: 'AdamS Passiv-Line PLUS',
     tagline: 'Energooszczędność w najlepszej cenie',
     description: 'System na profilu VEKA z pakietem trójszybowym. Doskonały stosunek ceny do parametrów termoizolacyjnych. Idealne dla nowego budownictwa energooszczędnego.',
-    features: ['Profil VEKA', 'Pakiet 3-szybowy', 'Energooszczędny', 'Gwarancja 10 lat'],
+    features: ['Profil VEKA', 'Pakiet 3-szybowy', 'Energooszczędny', 'Gwarancja'],
     image: '/images/produkty/passiv_line_plus.jpg',
   },
   {
-    id: 3, badge: null,
+    id: 3, badge: null, slug: 'veka-sl-82',
     name: 'AdamS VEKA SL 82',
     tagline: 'Slim Look – więcej światła, mniej profilu',
     description: 'Smukłe profile 82mm z efektem Slim Look. Minimalistyczna rama optycznie powiększa okno i wpuszcza maksimum naturalnego światła dziennego.',
@@ -122,7 +138,7 @@ const okna = [
     image: '/images/produkty/veka_sl_82.jpg',
   },
   {
-    id: 4, badge: null,
+    id: 4, badge: null, slug: 'veka-pf-70',
     name: 'AdamS VEKA PF 70',
     tagline: 'Sprawdzony klasyk – niezawodny wybór',
     description: 'Klasyczny system 5-komorowy 70mm. Sprawdzony w tysiącach polskich domów. Szeroka dostępność kolorów i kształtów w przystępnej cenie.',
@@ -130,7 +146,7 @@ const okna = [
     image: '/images/produkty/veka_pf_70.jpg',
   },
   {
-    id: 5, badge: 'NOWOŚĆ',
+    id: 5, badge: 'NOWOŚĆ', slug: 'ideal-8000',
     name: 'AdamS IDEAL 8000',
     tagline: 'Przełom – 8 komór, Uw ≤ 0,68 W/(m²K)',
     description: 'Innowacyjna konstrukcja 8-komorowa. Najlepsza izolacja akustyczna i termiczna w klasie. Dla wymagających inwestorów i budynków premium.',
@@ -138,15 +154,15 @@ const okna = [
     image: '/images/produkty/ideal_8000.jpg',
   },
   {
-    id: 6, badge: null,
+    id: 6, badge: null, slug: 'comfort-line-neo',
     name: 'AdamS COMFORT LINE NEO',
     tagline: 'Zaokrąglone narożniki – ponadczasowy design',
     description: 'System z zaokrąglonymi narożnikami na profilu VEKA. Klasyczny wygląd pasujący do każdej architektury — od bloku po willę.',
-    features: ['Zaokrąglone kształty', 'System VEKA', 'Szeroka paleta kolorów', 'Gwarancja 10 lat'],
+    features: ['Zaokrąglone kształty', 'System VEKA', 'Szeroka paleta kolorów', 'Gwarancja'],
     image: '/images/produkty/comfort_line_neo.webp',
   },
   {
-    id: 7, badge: 'PREMIUM',
+    id: 7, badge: 'PREMIUM', slug: 'elegant-comfort-line',
     name: 'AdamS ELEGANT COMFORT-LINE',
     tagline: 'Prosta elegancja – design klasy premium',
     description: 'Najwyższa półka estetyki z profili VEKA. Proste linie, perfekcyjne wykończenie. Dla tych, dla których wygląd jest tak samo ważny jak parametry.',
@@ -201,10 +217,10 @@ const drzwiTarasowe = [
 const drzwiZewnetrzne = [
   {
     id: 1, badge: 'BEZPIECZEŃSTWO',
-    name: 'Zewnętrzne Drzwi Vikking',
-    tagline: 'Antywłamaniowe RC3 – stalowa ochrona wejścia',
-    description: 'Stalowe drzwi wejściowe marki Vikking z certyfikatem antywłamaniowym RC3. Stal ocynkowana, 50+ modeli w bogatej palecie kolorów RAL. Solidne, estetyczne, bezpieczne.',
-    features: ['Certyfikat antywłamaniowy RC3', 'Stal ocynkowana', '50+ modeli', 'Paleta kolorów RAL', 'Gwarancja 5 lat'],
+    name: 'Zewnętrzne Drzwi Martom',
+    tagline: 'Drzwi hybrydowe – lider rozwiązań łączących materiały',
+    description: 'Drzwi stalowe marki Martom — lidera rozwiązań hybrydowych na polskim rynku. Opatentowana technologia łącząca drewno, stal, aluminium oraz zbrojone włóknem tworzywo ABS i piankę PUR. Bogata oferta modeli jedno- i dwuskrzydłowych, konkurencyjna cena.',
+    features: ['Technologia hybrydowa', 'Drewno + stal + aluminium + ABS', 'Wypełnienie pianą PUR', 'Modele jedno- i dwuskrzydłowe', 'Klasy odporności RC2 / RC3'],
     image: '/images/realizacje/DSC_1240-300x145.jpg',
   },
 ];
@@ -260,8 +276,8 @@ export default function Oferta() {
       </Section>
 
       {/* DRZWI ZEWNĘTRZNE */}
-      <Section id="drzwi" title="Drzwi Zewnętrzne Vikking" gray
-        subtitle="Stalowe drzwi wejściowe z certyfikatem antywłamaniowym RC3. Bezpieczeństwo i elegancja w jednym."
+      <Section id="drzwi" title="Drzwi Zewnętrzne Martom" gray
+        subtitle="Drzwi hybrydowe łączące drewno, stal i aluminium. Bezpieczeństwo, izolacja termiczna i elegancja w jednym."
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {drzwiZewnetrzne.map((p) => <ProductCard key={p.id} product={p} />)}

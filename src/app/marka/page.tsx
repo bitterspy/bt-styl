@@ -158,7 +158,7 @@ function Letterhead() {
           bezpłatny pomiar, dobór systemu, produkcję, transport oraz profesjonalny montaż zgodny z normą PN-B-13079.
         </p>
         <p style={{ marginBottom: 20 }}>
-          Wszystkie okna objęte są gwarancją producenta oraz 2-letnią gwarancją na montaż.
+          Wszystkie okna objęte są gwarancją producenta oraz gwarancją na montaż.
           Zapraszamy do salonu lub kontaktu telefonicznego w celu omówienia szczegółów.
         </p>
         <p>Z poważaniem,</p>

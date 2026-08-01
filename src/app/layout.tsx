@@ -17,13 +17,13 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: 'BT-Styl Szczecin | Okna PCV, Drzwi, Rolety – Salon Firmowy AdamS VEKA',
   description:
-    'Salon sprzedaży okien PCV i aluminiowych w Szczecinie. Autoryzowany dealer AdamS na systemach VEKA. Okna, drzwi tarasowe, rolety Aluprof. Montaż i pomiar gratis. Zadzwoń: 91 454-09-99',
+    'Salon sprzedaży okien PCV i aluminiowych w Szczecinie. Salon firmowy AdamS na systemach VEKA. Okna, drzwi tarasowe, rolety Aluprof. Montaż i pomiar gratis. Zadzwoń: 91 454-09-99',
   keywords: [
     'okna PCV Szczecin',
     'okna aluminiowe Szczecin',
     'drzwi tarasowe Szczecin',
     'rolety Szczecin',
-    'AdamS VEKA dealer Szczecin',
+    'AdamS VEKA Szczecin',
     'BT-Styl Szczecin',
     'okna Bagienna Szczecin',
     'wymiana okien Szczecin',
@@ -80,7 +80,7 @@ const jsonLd = {
   ],
   priceRange: '$$',
   description:
-    'Autoryzowany salon sprzedaży okien PCV i aluminiowych w Szczecinie. Dealer AdamS na systemach VEKA.',
+    'Salon firmowy sprzedaży okien PCV i aluminiowych w Szczecinie. AdamS na systemach VEKA.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

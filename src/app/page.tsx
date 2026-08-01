@@ -7,6 +7,7 @@ import WhyUs from '@/components/WhyUs';
 import Realizacje from '@/components/Realizacje';
 import Partners from '@/components/Partners';
 import Testimonials from '@/components/Testimonials';
+import Aktualnosci from '@/components/Aktualnosci';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
@@ -24,6 +25,7 @@ export default function Home() {
         <Realizacje />
         <Partners />
         <Testimonials />
+        <Aktualnosci />
         <Contact />
       </main>
       <Footer />

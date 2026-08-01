@@ -45,3 +45,6 @@ next-env.d.ts
 
 # netlify build artifacts (server handler bundles, ~50 MB)
 /.netlify/
+
+# backend PHP — realna konfiguracja z hasłami (nie commitować danych produkcyjnych)
+backend/config.production.php
