@@ -1,3 +1,14 @@
+// Pełna paleta kolorów AdamS, dla której mamy pobrane lokalne zdjęcia próbek
+// (zob. src/lib/kolory.ts). Używana jako wspólna lista tam, gdzie oryginalna
+// strona nie miała własnej, unikalnej palety dla danego okna.
+export const paletaPodstawowa = [
+  'Biały', 'Kremowy', 'Palisander', 'Orzech', 'Oregon III', 'Mahoń', 'Jet Black',
+  'Dąb Sheffield brązowy', 'Dąb specjalny', 'Dąb Sheffield szary', 'Dąb Sheffield jasny',
+  'Dąb naturalny', 'Daglezja', 'Ciemny grafitowy', 'Ciemny dąb', 'Ciemnobrązowy',
+  'Ciemny czerwony', 'Ciemnozielony', 'Brzoza', 'Brylantowy niebieski', 'Betonowy szary',
+  'Złoty dąb', 'Zielony', 'Szary antracytowy',
+];
+
 export type OknoDetal = {
   slug: string;
   name: string;
@@ -61,7 +72,7 @@ export const oknaDetale: OknoDetal[] = [
       { label: 'Przepuszczalność powietrza', value: 'klasa 4' },
       { label: 'Nośność urządzeń zabezpieczających', value: '350 N' },
     ],
-    kolory: [],
+    kolory: paletaPodstawowa,
     image: '/images/produkty/passiv_line_plus.jpg',
   },
   {
@@ -87,7 +98,7 @@ export const oknaDetale: OknoDetal[] = [
       { label: 'Przepuszczalność powietrza', value: 'klasa 4' },
       { label: 'Nośność urządzeń zabezpieczających', value: '350 N' },
     ],
-    kolory: [],
+    kolory: paletaPodstawowa,
     image: '/images/produkty/veka_sl_82.jpg',
   },
   {
@@ -112,7 +123,7 @@ export const oknaDetale: OknoDetal[] = [
       { label: 'Przepuszczalność powietrza', value: 'klasa 4' },
       { label: 'Nośność urządzeń zabezpieczających', value: '350 N' },
     ],
-    kolory: [],
+    kolory: paletaPodstawowa,
     image: '/images/produkty/veka_pf_70.jpg',
   },
   {
@@ -136,7 +147,7 @@ export const oknaDetale: OknoDetal[] = [
       { label: 'Przepuszczalność powietrza', value: 'klasa 4' },
       { label: 'Nośność urządzeń zabezpieczających', value: '350 N' },
     ],
-    kolory: [],
+    kolory: paletaPodstawowa,
     image: '/images/produkty/ideal_8000.jpg',
   },
   {
@@ -190,7 +201,7 @@ export const oknaDetale: OknoDetal[] = [
       { label: 'Przepuszczalność powietrza', value: 'klasa 4' },
       { label: 'Nośność urządzeń zabezpieczających', value: '350 N' },
     ],
-    kolory: [],
+    kolory: paletaPodstawowa,
     image: '/images/produkty/elegant_comfort_line.webp',
   },
 ];

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, LogIn } from 'lucide-react';
 import { LogoSVG } from './Logo';
 import Image from 'next/image';
 
@@ -148,6 +148,18 @@ export default function Navbar() {
             )}
           </ul>
 
+          {/* Panel admina */}
+          <a
+            href="/backend/admin/login.php"
+            title="Zaloguj się do panelu Aktualności"
+            className={`hidden lg:flex items-center gap-1.5 px-2 py-2 text-sm font-semibold tracking-wide uppercase whitespace-nowrap transition-colors ${
+              scrolled ? 'text-gray-500 hover:text-[#c0392b]' : 'text-white/70 hover:text-white'
+            }`}
+          >
+            <LogIn size={15} />
+            Zaloguj
+          </a>
+
           {/* CTA phone */}
           <a
             href="tel:+48914540999"
@@ -231,6 +243,14 @@ export default function Navbar() {
                     </li>
                   )
                 )}
+                <li>
+                  <a
+                    href="/backend/admin/login.php"
+                    className="flex items-center gap-2 text-gray-500 font-medium py-2.5 border-b border-gray-100"
+                  >
+                    <LogIn size={16} /> Zaloguj się
+                  </a>
+                </li>
                 <li className="pt-2 space-y-2">
                   <a
                     href="tel:+48914540999"

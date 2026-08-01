@@ -52,7 +52,7 @@ Każde okno opuszczające nasz salon ma certyfikat producenta i pełną dokument
   {
     id: 'montaz',
     icon: Wrench,
-    title: 'Montaż w cenie',
+    title: 'Fachowy montaż',
     description: 'Kompleksowa usługa: sprzedaż, transport i profesjonalny montaż w jednej cenie.',
     image: '/images/feat_montaz.jpg',
     content: `U nas nie ma ukrytych kosztów. Cena okna to cena kompleksowej usługi — **od pomiaru do gotowego, sprawdzonego montażu**.
