@@ -5,7 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { BookOpen, ChevronRight, X, Phone } from 'lucide-react';
 import Image from 'next/image';
 
-const articles = [
+export const articles = [
   {
     id: 1,
     title: 'Kiedy najlepiej wymieniać okna?',

@@ -2,9 +2,9 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Oferta from '@/components/Oferta';
-import Porady from '@/components/Porady';
-import WhyUs from '@/components/WhyUs';
-import Realizacje from '@/components/Realizacje';
+import ONasSkrot from '@/components/ONasSkrot';
+import PoradySkrot from '@/components/PoradySkrot';
+import RealizacjeSkrot from '@/components/RealizacjeSkrot';
 import Partners from '@/components/Partners';
 import Testimonials from '@/components/Testimonials';
 import Aktualnosci from '@/components/Aktualnosci';
@@ -20,9 +20,9 @@ export default function Home() {
         <Hero />
         <Features />
         <Oferta />
-        <WhyUs />
-        <Porady />
-        <Realizacje />
+        <ONasSkrot />
+        <PoradySkrot />
+        <RealizacjeSkrot />
         <Partners />
         <Testimonials />
         <Aktualnosci />

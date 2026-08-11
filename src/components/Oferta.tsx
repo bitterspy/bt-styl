@@ -274,7 +274,7 @@ const drzwiTarasowe = [
 
 const drzwiZewnetrzne = [
   {
-    id: 1, badge: 'BEZPIECZEŃSTWO', externalUrl: 'https://drzwimartom.pl',
+    id: 1, badge: 'BEZPIECZEŃSTWO', slug: 'drzwi-zewnetrzne',
     name: 'Zewnętrzne Drzwi Martom',
     tagline: 'Drzwi hybrydowe – lider rozwiązań łączących materiały',
     description: 'Drzwi stalowe marki Martom — lidera rozwiązań hybrydowych na polskim rynku. Opatentowana technologia łącząca drewno, stal, aluminium oraz zbrojone włóknem tworzywo ABS i piankę PUR. Bogata oferta modeli jedno- i dwuskrzydłowych, konkurencyjna cena.',

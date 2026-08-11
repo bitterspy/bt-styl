@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { contact } from '@/lib/data';
 import { LogoSVG } from './Logo';
@@ -24,17 +25,19 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4 text-sm tracking-wide uppercase" style={{ color: '#e8a020' }}>Oferta</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              {['Okna PCV', 'Okna Aluminiowe', 'Drzwi Tarasowe', 'Drzwi Zewnętrzne', 'Rolety Zewnętrzne', 'Rolety Screen'].map((item) => (
-                <li key={item}>
-                  <a href="#oferta" className="hover:text-white transition-colors">{item}</a>
-                </li>
-              ))}
+              <li><Link href="/#okna-pcv" className="hover:text-white transition-colors">Okna PCV</Link></li>
+              <li><Link href="/#drzwi-tarasowe" className="hover:text-white transition-colors">Drzwi Tarasowe</Link></li>
+              <li><Link href="/oferta/drzwi-zewnetrzne/" className="hover:text-white transition-colors">Drzwi Zewnętrzne</Link></li>
+              <li><Link href="/#rolety" className="hover:text-white transition-colors">Rolety</Link></li>
             </ul>
             <h4 className="font-bold mt-6 mb-3 text-sm tracking-wide uppercase" style={{ color: '#e8a020' }}>Firma</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              <li><a href="/marka" className="hover:text-white transition-colors">Materiały reklamowe</a></li>
-              <li><a href="#porady" className="hover:text-white transition-colors">Porady i poradniki</a></li>
-              <li><a href="#realizacje" className="hover:text-white transition-colors">Realizacje</a></li>
+              <li><Link href="/o-nas/" className="hover:text-white transition-colors">O nas</Link></li>
+              <li><Link href="/marka/" className="hover:text-white transition-colors">Materiały reklamowe</Link></li>
+              <li><Link href="/porady/" className="hover:text-white transition-colors">Porady i poradniki</Link></li>
+              <li><Link href="/realizacje/" className="hover:text-white transition-colors">Realizacje</Link></li>
+              <li><Link href="/aktualnosci/" className="hover:text-white transition-colors">Aktualności</Link></li>
+              <li><Link href="/kontakt/" className="hover:text-white transition-colors">Kontakt</Link></li>
             </ul>
           </div>
 

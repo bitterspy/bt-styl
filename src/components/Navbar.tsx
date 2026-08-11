@@ -6,21 +6,20 @@ import { Menu, X, Phone, ChevronDown, LogIn } from 'lucide-react';
 import { LogoSVG } from './Logo';
 import Link from 'next/link';
 
-const ofertaLinks: { label: string; href: string; external?: boolean }[] = [
-  { label: 'Okna PCV', href: '#okna-pcv' },
-  { label: 'Drzwi Tarasowe / Balkonowe', href: '#drzwi-tarasowe' },
-  { label: 'Drzwi Zewnętrzne', href: 'https://drzwimartom.pl', external: true },
-  { label: 'Rolety', href: '#rolety' },
+const ofertaLinks = [
+  { label: 'Okna PCV', href: '/#okna-pcv' },
+  { label: 'Drzwi Tarasowe / Balkonowe', href: '/#drzwi-tarasowe' },
+  { label: 'Drzwi Zewnętrzne', href: '/oferta/drzwi-zewnetrzne/' },
+  { label: 'Rolety', href: '/#rolety' },
 ];
 
-const navLinks: { href: string; label: string; hasMega?: boolean; external?: boolean }[] = [
-  { href: '#dlaczego-my', label: 'O Nas' },
-  { href: '#aktualnosci', label: 'Aktualności' },
-  { href: '#okna-pcv', label: 'Oferta', hasMega: true },
-  { href: '#realizacje', label: 'Realizacje' },
-  { href: '#porady', label: 'Porady' },
-  { href: '#kontakt', label: 'Kontakt' },
-  { href: '/marka', label: 'Do pobrania', external: true },
+const navLinks: { href: string; label: string; hasMega?: boolean }[] = [
+  { href: '/o-nas/', label: 'O Nas' },
+  { href: '/aktualnosci/', label: 'Aktualności' },
+  { href: '/#okna-pcv', label: 'Oferta', hasMega: true },
+  { href: '/realizacje/', label: 'Realizacje' },
+  { href: '/porady/', label: 'Porady' },
+  { href: '/kontakt/', label: 'Kontakt' },
 ];
 
 export default function Navbar({ solid = false }: { solid?: boolean }) {
@@ -43,15 +42,6 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleNavClick = (href: string) => {
-    setMenuOpen(false);
-    setMegaOpen(false);
-    setTimeout(() => {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 50);
-  };
 
   return (
     <>
@@ -87,17 +77,17 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
             {navLinks.map((link) =>
               link.hasMega ? (
                 <li key={link.href} className="relative" ref={megaRef}>
-                  <button
+                  <Link
+                    href={link.href}
                     onMouseEnter={() => setMegaOpen(true)}
                     onMouseLeave={() => setMegaOpen(false)}
-                    onClick={() => handleNavClick('#okna-pcv')}
                     className={`flex items-center gap-1 px-2 lg:px-3 py-2 text-sm font-semibold tracking-wide uppercase whitespace-nowrap transition-colors ${
                       scrolled ? 'text-[#c0392b] hover:text-[#e8a020]' : 'text-[#f5c55a] hover:text-white'
                     }`}
                   >
                     {link.label}
                     <ChevronDown size={14} className={`transition-transform ${megaOpen ? 'rotate-180' : ''}`} />
-                  </button>
+                  </Link>
 
                   {/* Dropdown Oferty */}
                   <AnimatePresence>
@@ -115,24 +105,13 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
                         <ul className="py-2">
                           {ofertaLinks.map((item) => (
                             <li key={item.href}>
-                              {item.external ? (
-                                <a
-                                  href={item.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={() => setMegaOpen(false)}
-                                  className="block w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-[#c0392b] hover:bg-red-50 transition-colors"
-                                >
-                                  {item.label}
-                                </a>
-                              ) : (
-                                <button
-                                  onClick={() => handleNavClick(item.href)}
-                                  className="w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-[#c0392b] hover:bg-red-50 transition-colors"
-                                >
-                                  {item.label}
-                                </button>
-                              )}
+                              <Link
+                                href={item.href}
+                                onClick={() => setMegaOpen(false)}
+                                className="block w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-[#c0392b] hover:bg-red-50 transition-colors"
+                              >
+                                {item.label}
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -140,30 +119,29 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
                     )}
                   </AnimatePresence>
                 </li>
-              ) : link.external ? (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className={`px-2 lg:px-3 py-2 text-sm font-semibold tracking-wide uppercase whitespace-nowrap transition-colors ${
-                      scrolled ? 'text-[#e8a020] hover:text-[#c0392b]' : 'text-[#e8a020] hover:text-white'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                </li>
               ) : (
                 <li key={link.href}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
-                    className={`px-2 lg:px-3 py-2 text-sm font-semibold tracking-wide uppercase whitespace-nowrap transition-colors ${
+                  <Link
+                    href={link.href}
+                    className={`block px-2 lg:px-3 py-2 text-sm font-semibold tracking-wide uppercase whitespace-nowrap transition-colors ${
                       scrolled ? 'text-gray-700 hover:text-[#c0392b]' : 'text-white/90 hover:text-white'
                     }`}
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               )
             )}
+            <li>
+              <Link
+                href="/marka/"
+                className={`block px-2 lg:px-3 py-2 text-sm font-semibold tracking-wide uppercase whitespace-nowrap transition-colors ${
+                  scrolled ? 'text-[#e8a020] hover:text-[#c0392b]' : 'text-[#e8a020] hover:text-white'
+                }`}
+              >
+                Do pobrania
+              </Link>
+            </li>
           </ul>
 
           {/* Panel admina */}
@@ -227,53 +205,42 @@ export default function Navbar({ solid = false }: { solid?: boolean }) {
                             exit={{ height: 0, opacity: 0 }}
                             className="overflow-hidden pl-3 pb-1"
                           >
-                            {ofertaLinks.map((item) =>
-                              item.external ? (
-                                <a
-                                  key={item.href}
-                                  href={item.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={() => setMenuOpen(false)}
-                                  className="block w-full text-left text-sm text-gray-600 py-2 border-b border-gray-50 hover:text-[#c0392b] transition-colors"
-                                >
-                                  {item.label}
-                                </a>
-                              ) : (
-                                <button
-                                  key={item.href}
-                                  onClick={() => handleNavClick(item.href)}
-                                  className="block w-full text-left text-sm text-gray-600 py-2 border-b border-gray-50 hover:text-[#c0392b] transition-colors"
-                                >
-                                  {item.label}
-                                </button>
-                              )
-                            )}
+                            {ofertaLinks.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="block w-full text-left text-sm text-gray-600 py-2 border-b border-gray-50 hover:text-[#c0392b] transition-colors"
+                              >
+                                {item.label}
+                              </Link>
+                            ))}
                           </motion.div>
                         )}
                       </AnimatePresence>
                     </li>
-                  ) : link.external ? (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        className="block w-full text-left font-medium py-2.5 border-b border-gray-100 transition-colors"
-                        style={{ color: '#e8a020' }}
-                      >
-                        {link.label}
-                      </a>
-                    </li>
                   ) : (
                     <li key={link.href}>
-                      <button
-                        onClick={() => handleNavClick(link.href)}
+                      <Link
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
                         className="block w-full text-left text-gray-800 font-medium py-2.5 border-b border-gray-100 hover:text-[#c0392b] transition-colors"
                       >
                         {link.label}
-                      </button>
+                      </Link>
                     </li>
                   )
                 )}
+                <li>
+                  <Link
+                    href="/marka/"
+                    onClick={() => setMenuOpen(false)}
+                    className="block w-full text-left font-medium py-2.5 border-b border-gray-100 transition-colors"
+                    style={{ color: '#e8a020' }}
+                  >
+                    Do pobrania
+                  </Link>
+                </li>
                 <li>
                   <a
                     href="/backend/admin/login.php"
