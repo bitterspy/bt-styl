@@ -252,11 +252,10 @@ export const realizacje = [
 ];
 
 export const partners = [
-  { name: 'VEKA', description: 'Lider systemów PVC' },
-  { name: 'AdamS', description: 'Producent okien PVC' },
-  { name: 'Martom', description: 'Drzwi hybrydowe' },
-  { name: 'Aluprof', description: 'Systemy aluminiowe' },
-  { name: 'Barański', description: 'Drzwi zewnętrzne' },
+  { name: 'VEKA', description: 'Lider systemów PVC', url: 'https://www.veka.pl' },
+  { name: 'AdamS', description: 'Producent okien PVC', url: 'https://www.adams.com.pl' },
+  { name: 'Martom', description: 'Drzwi hybrydowe', url: 'https://drzwimartom.pl' },
+  { name: 'Aluprof', description: 'Systemy aluminiowe', url: 'https://aluprof.eu/pl' },
 ];
 
 export const contact = {

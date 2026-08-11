@@ -34,7 +34,7 @@ export default function Realizacje() {
   }
 
   return (
-    <section id="realizacje" ref={ref} className="py-20 bg-white">
+    <section id="realizacje" ref={ref} className="pt-12 pb-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -46,7 +46,7 @@ export default function Realizacje() {
             Galeria
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-bold" style={{ color: '#1a3a5c' }}>
-            Nasze realizacje
+            Nasze przykładowe realizacje
           </h2>
           <p className="mt-3 text-gray-600 max-w-xl mx-auto">
             Ponad 500 zrealizowanych montaży w Szczecinie i okolicach. Każdy projekt wykonany z najwyższą starannością.

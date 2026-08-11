@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import { stats } from '@/lib/data';
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -55,34 +56,47 @@ export default function WhyUs() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-5xl mx-auto mb-16"
         >
-          <span className="text-xs font-bold tracking-widest uppercase" style={{ color: '#e8a020' }}>
-            O nas
-          </span>
-          <h2 className="mt-2 mb-6 text-3xl sm:text-4xl font-bold text-white">
-            Szanowni Państwo
-          </h2>
-          <div className="text-blue-100 text-sm sm:text-base leading-relaxed space-y-4 text-left">
-            <p>
-              Jest nam niezmiernie miło powitać Państwa w naszym serwisie internetowym, który poświęcony jest
-              stolarce okiennej i drzwiowej. Działania, jakie prowadzimy, skupiają się na dostarczaniu Państwu
-              najlepszych produktów od renomowanych polskich producentów. Lata doświadczeń to okres, kiedy
-              mogliśmy poznać specyfikę produktową oraz rzetelność poszczególnych firm, dlatego wybraliśmy
-              najlepszych dostawców, oferujących najwyższej klasy okna i drzwi.
-            </p>
-            <p>
-              Nasza oferta to markowe okna, drzwi oraz rolety w Szczecinie. Dzięki zróżnicowanemu asortymentowi
-              jesteśmy w stanie obsłużyć Państwa inwestycje kompleksowo, dostarczając produkty nietuzinkowe, o
-              wyrafinowanym wzornictwie. Pracę wykonujemy z pasją oraz w miłej atmosferze, w pełni angażując
-              nabyte doświadczenie, zapewniamy Państwu najlepsze rozwiązania.
-            </p>
-            <p>
-              Zapraszamy do naszego biura, celem zapoznania się z naszą ofertą. Poprzez prezentację produktów
-              poznamy Państwa oczekiwania, dzięki czemu indywidualnie dopasujemy ofertę. Nasz salon znajduje
-              się przy ulicy Bagiennej 6 w Szczecinie. Zapewniamy profesjonalny montaż oraz specjalistyczny
-              transport.
-            </p>
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: '#e8a020' }}>
+              O nas
+            </span>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-white">
+              Szanowni Państwo
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="text-blue-100 text-sm sm:text-base leading-relaxed space-y-4 text-justify">
+              <p>
+                Jest nam niezmiernie miło powitać Państwa w naszym serwisie internetowym, który poświęcony jest
+                stolarce okiennej i drzwiowej. Działania, jakie prowadzimy, skupiają się na dostarczaniu Państwu
+                najlepszych produktów od renomowanych polskich producentów. Lata doświadczeń to okres, kiedy
+                mogliśmy poznać specyfikę produktową oraz rzetelność poszczególnych firm, dlatego wybraliśmy
+                najlepszych dostawców, oferujących najwyższej klasy okna i drzwi.
+              </p>
+              <p>
+                Nasza oferta to markowe okna, drzwi oraz rolety w Szczecinie. Dzięki zróżnicowanemu asortymentowi
+                jesteśmy w stanie obsłużyć Państwa inwestycje kompleksowo, dostarczając produkty nietuzinkowe, o
+                wyrafinowanym wzornictwie. Pracę wykonujemy z pasją oraz w miłej atmosferze, w pełni angażując
+                nabyte doświadczenie, zapewniamy Państwu najlepsze rozwiązania.
+              </p>
+              <p>
+                Zapraszamy do naszego biura, celem zapoznania się z naszą ofertą. Poprzez prezentację produktów
+                poznamy Państwa oczekiwania, dzięki czemu indywidualnie dopasujemy ofertę. Nasz salon znajduje
+                się przy ulicy Bagiennej 6 w Szczecinie. Zapewniamy profesjonalny montaż oraz specjalistyczny
+                transport.
+              </p>
+            </div>
+            <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden">
+              <Image
+                src="/images/onas/salon-bagienna-6.jpg"
+                alt="Salon firmowy BT-Styl przy ulicy Bagiennej 6 w Szczecinie"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </motion.div>
 

@@ -22,29 +22,75 @@ const badgeColors: Record<string, string> = {
 
 type Product = {
   id: number; badge: string | null; name: string; tagline: string;
-  description: string; features: string[]; image: string; slug?: string;
+  description: string; features: string[]; image: string; slug?: string; externalUrl?: string;
 };
 
 function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col border border-gray-100">
-      <div className="relative h-52 overflow-hidden bg-gray-50 flex items-center justify-center p-4">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-contain group-hover:scale-105 transition-transform duration-500 p-2"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
-        {product.badge && (
-          <span
-            className="absolute top-3 left-3 px-2.5 py-1 text-xs font-bold text-white rounded-full z-10"
-            style={{ background: badgeColors[product.badge] ?? '#1a3a5c' }}
-          >
-            {product.badge}
-          </span>
-        )}
-      </div>
+      {product.slug ? (
+        <Link
+          href={`/oferta/${product.slug}/`}
+          className="relative h-52 overflow-hidden bg-gray-50 flex items-center justify-center p-4"
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-contain group-hover:scale-105 transition-transform duration-500 p-2"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+          {product.badge && (
+            <span
+              className="absolute top-3 left-3 px-2.5 py-1 text-xs font-bold text-white rounded-full z-10"
+              style={{ background: badgeColors[product.badge] ?? '#1a3a5c' }}
+            >
+              {product.badge}
+            </span>
+          )}
+        </Link>
+      ) : product.externalUrl ? (
+        <a
+          href={product.externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative h-52 overflow-hidden bg-gray-50 flex items-center justify-center p-4"
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-contain group-hover:scale-105 transition-transform duration-500 p-2"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+          {product.badge && (
+            <span
+              className="absolute top-3 left-3 px-2.5 py-1 text-xs font-bold text-white rounded-full z-10"
+              style={{ background: badgeColors[product.badge] ?? '#1a3a5c' }}
+            >
+              {product.badge}
+            </span>
+          )}
+        </a>
+      ) : (
+        <div className="relative h-52 overflow-hidden bg-gray-50 flex items-center justify-center p-4">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-contain group-hover:scale-105 transition-transform duration-500 p-2"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+          {product.badge && (
+            <span
+              className="absolute top-3 left-3 px-2.5 py-1 text-xs font-bold text-white rounded-full z-10"
+              style={{ background: badgeColors[product.badge] ?? '#1a3a5c' }}
+            >
+              {product.badge}
+            </span>
+          )}
+        </div>
+      )}
       <div className="p-5 flex flex-col flex-1">
         <p className="text-xs font-semibold mb-1" style={{ color: '#c0392b' }}>{product.tagline}</p>
         <h3 className="font-bold text-base mb-2 leading-tight" style={{ color: '#1a3a5c' }}>{product.name}</h3>
@@ -66,6 +112,18 @@ function ProductCard({ product }: { product: Product }) {
             Zobacz szczegóły
             <ArrowRight size={14} />
           </Link>
+        )}
+        {product.externalUrl && (
+          <a
+            href={product.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-semibold mb-2 transition-all hover:bg-gray-50"
+            style={{ color: '#1a3a5c', border: '1px solid #1a3a5c' }}
+          >
+            Zobacz na stronie producenta
+            <ArrowRight size={14} />
+          </a>
         )}
         <a
           href="tel:+48914540999"
@@ -173,7 +231,7 @@ const okna = [
 
 const drzwiTarasowe = [
   {
-    id: 1, badge: 'BESTSELLER',
+    id: 1, badge: 'BESTSELLER', slug: 'hst-corner-view',
     name: 'HST CORNER VIEW',
     tagline: 'Narożne przeszklenie – architektura bez granic',
     description: 'Innowacyjny system przesuwno-uchylny łączący design południowej Europy z energooszczędnością standardów północnych. Umożliwia pełne przeszklenie narożne bez słupka.',
@@ -181,7 +239,7 @@ const drzwiTarasowe = [
     image: '/images/oferta/hst_corner_view.jpg',
   },
   {
-    id: 2, badge: null,
+    id: 2, badge: null, slug: 'hst-passiv',
     name: 'HST PASSIV',
     tagline: 'Dom pasywny – maksymalna energooszczędność',
     description: 'Drzwi unoszono-przesuwne przeznaczone dla domów pasywnych i zeroenergetycznych. Głęboka zabudowa z pakietami Ug=0,5 lub 0,6 W/m²K.',
@@ -189,7 +247,7 @@ const drzwiTarasowe = [
     image: '/images/oferta/hst_passiv_front.jpg',
   },
   {
-    id: 3, badge: null,
+    id: 3, badge: null, slug: 'hst-basic',
     name: 'HST BASIC',
     tagline: 'Solidna podstawa – sprawdzony system HST',
     description: 'Klasyczne drzwi unoszono-przesuwne HST. Skrzydło unosi się przed przesunięciem — zero oporu, cichy bieg, doskonała szczelność. Wiele konfiguracji otwarcia.',
@@ -197,7 +255,7 @@ const drzwiTarasowe = [
     image: '/images/oferta/HST_Basic.png',
   },
   {
-    id: 4, badge: null,
+    id: 4, badge: null, slug: 'hst-sl-82',
     name: 'HST SL 82',
     tagline: 'Slim Look + HST – elegancja i funkcjonalność',
     description: 'System HST na profilu SOFTLINE 82mm. Płaski próg, układ uszczelek klasy huraganowej, 3-szybowe oszklenie. Idealne do nowych domów energooszczędnych i renowacji.',
@@ -205,7 +263,7 @@ const drzwiTarasowe = [
     image: '/images/oferta/schemat-a.png',
   },
   {
-    id: 5, badge: 'NOWOŚĆ',
+    id: 5, badge: 'NOWOŚĆ', slug: 'smart-slide',
     name: 'SMART-SLIDE',
     tagline: 'Nowoczesna alternatywa dla PSK i patio',
     description: 'Zaawansowane drzwi przesuwne dla domów i obiektów użyteczności publicznej. Skrzydło do 1,5×2,3m. Intuicyjny mechanizm, oszczędność miejsca — brak potrzeby rozwarcia w głąb pomieszczenia.',
@@ -216,7 +274,7 @@ const drzwiTarasowe = [
 
 const drzwiZewnetrzne = [
   {
-    id: 1, badge: 'BEZPIECZEŃSTWO',
+    id: 1, badge: 'BEZPIECZEŃSTWO', externalUrl: 'https://drzwimartom.pl',
     name: 'Zewnętrzne Drzwi Martom',
     tagline: 'Drzwi hybrydowe – lider rozwiązań łączących materiały',
     description: 'Drzwi stalowe marki Martom — lidera rozwiązań hybrydowych na polskim rynku. Opatentowana technologia łącząca drewno, stal, aluminium oraz zbrojone włóknem tworzywo ABS i piankę PUR. Bogata oferta modeli jedno- i dwuskrzydłowych, konkurencyjna cena.',

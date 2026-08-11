@@ -21,13 +21,16 @@ export default function Partners() {
         </motion.p>
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
           {partners.map((partner, i) => (
-            <motion.div
+            <motion.a
               key={partner.name}
+              href={partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group flex flex-col items-center gap-1"
-              title={partner.description}
+              title={`${partner.description} — otwórz stronę producenta`}
             >
               <div
                 className="px-8 py-4 rounded-xl font-black text-2xl tracking-tight transition-all duration-300 grayscale group-hover:grayscale-0 group-hover:shadow-lg group-hover:scale-105"
@@ -42,7 +45,7 @@ export default function Partners() {
               <span className="text-xs text-gray-400 group-hover:text-gray-600 transition-colors">
                 {partner.description}
               </span>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

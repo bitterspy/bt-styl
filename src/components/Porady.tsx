@@ -367,7 +367,7 @@ export default function Porady() {
 
   return (
     <>
-      <section id="porady" ref={ref} className="py-20 bg-gray-50">
+      <section id="porady" ref={ref} className="pt-20 pb-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <motion.div
