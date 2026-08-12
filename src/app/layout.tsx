@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     'okna Bagienna Szczecin',
     'wymiana okien Szczecin',
   ],
+  metadataBase: new URL('https://dobreoknaszczecin.pl'),
   openGraph: {
     title: 'BT-Styl Szczecin | Okna PCV, Drzwi, Rolety',
     description:
