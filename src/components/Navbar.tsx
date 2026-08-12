@@ -7,16 +7,16 @@ import { LogoSVG } from './Logo';
 import Link from 'next/link';
 
 const ofertaLinks = [
-  { label: 'Okna PCV', href: '/#okna-pcv' },
-  { label: 'Drzwi Tarasowe / Balkonowe', href: '/#drzwi-tarasowe' },
+  { label: 'Okna PCV', href: '/oferta/#okna-pcv' },
+  { label: 'Drzwi Tarasowe / Balkonowe', href: '/oferta/#drzwi-tarasowe' },
   { label: 'Drzwi Zewnętrzne', href: '/oferta/drzwi-zewnetrzne/' },
-  { label: 'Rolety', href: '/#rolety' },
+  { label: 'Rolety', href: '/oferta/#rolety' },
 ];
 
 const navLinks: { href: string; label: string; hasMega?: boolean }[] = [
   { href: '/o-nas/', label: 'O Nas' },
   { href: '/aktualnosci/', label: 'Aktualności' },
-  { href: '/#okna-pcv', label: 'Oferta', hasMega: true },
+  { href: '/oferta/', label: 'Oferta', hasMega: true },
   { href: '/realizacje/', label: 'Realizacje' },
   { href: '/porady/', label: 'Porady' },
   { href: '/kontakt/', label: 'Kontakt' },

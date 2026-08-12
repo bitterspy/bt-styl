@@ -17,7 +17,7 @@ export default function DrzwiZewnetrznePage() {
       <main className="pt-28 pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
-            href="/#drzwi"
+            href="/oferta/#drzwi"
             className="flex w-fit items-center gap-2 text-sm font-semibold mb-8 hover:opacity-70 transition-opacity"
             style={{ color: '#1a3a5c' }}
           >

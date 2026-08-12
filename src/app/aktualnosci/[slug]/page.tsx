@@ -55,13 +55,21 @@ export default async function WpisDetailPage({ params }: { params: Promise<{ slu
           </div>
 
           <div className="relative h-64 sm:h-96 rounded-2xl overflow-hidden mb-10 bg-gray-100">
-            <Image src={wpis.obrazek} alt={wpis.tytul} fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" />
+            <Image src={wpis.obrazek} alt={wpis.tytul} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 768px" />
           </div>
 
           <div className="space-y-4 text-gray-700 leading-relaxed">
-            {wpis.tresc.map((paragraf, i) => (
-              <p key={i}>{paragraf}</p>
-            ))}
+            {wpis.tresc.map((paragraf, i) => {
+              const jestSrodtytulem = paragraf.length < 60 && !/[.!?"]$/.test(paragraf.trim());
+              if (jestSrodtytulem) {
+                return (
+                  <h2 key={i} className="text-lg sm:text-xl font-bold pt-4" style={{ color: '#1a3a5c' }}>
+                    {paragraf}
+                  </h2>
+                );
+              }
+              return <p key={i}>{paragraf}</p>;
+            })}
           </div>
 
           <div className="mt-12 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4" style={{ background: '#f0f5fa' }}>

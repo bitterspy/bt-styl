@@ -32,7 +32,7 @@ export default async function OknoDetailPage({ params }: { params: Promise<{ slu
   if (!produkt) notFound();
 
   const isDrzwiTarasowe = drzwiTarasoweDetale.some((d) => d.slug === slug);
-  const wrocHref = isDrzwiTarasowe ? '/#drzwi-tarasowe' : '/#okna-pcv';
+  const wrocHref = isDrzwiTarasowe ? '/oferta/#drzwi-tarasowe' : '/oferta/#okna-pcv';
   const drzwiDetal = getDrzwiTarasoweBySlug(slug);
   const przekroje = drzwiDetal?.przekroje;
   const dokumenty = drzwiDetal?.dokumenty;

@@ -25,7 +25,7 @@ type Product = {
   description: string; features: string[]; image: string; slug?: string; externalUrl?: string;
 };
 
-function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col border border-gray-100">
       {product.slug ? (
@@ -170,7 +170,7 @@ function Section({ id, title, subtitle, children, gray }: {
 
 // ─── DANE ───────────────────────────────────────────────────────────────────
 
-const okna = [
+export const okna = [
   {
     id: 1, badge: 'BESTSELLER', slug: 'passiv-line-ultra',
     name: 'AdamS PASSIV-LINE ULTRA',
@@ -229,7 +229,7 @@ const okna = [
   },
 ];
 
-const drzwiTarasowe = [
+export const drzwiTarasowe = [
   {
     id: 1, badge: 'BESTSELLER', slug: 'hst-corner-view',
     name: 'HST CORNER VIEW',
@@ -272,7 +272,7 @@ const drzwiTarasowe = [
   },
 ];
 
-const drzwiZewnetrzne = [
+export const drzwiZewnetrzne = [
   {
     id: 1, badge: 'BEZPIECZEŃSTWO', slug: 'drzwi-zewnetrzne',
     name: 'Zewnętrzne Drzwi Martom',
@@ -283,7 +283,7 @@ const drzwiZewnetrzne = [
   },
 ];
 
-const rolety = [
+export const rolety = [
   {
     id: 1, badge: 'POLECANE',
     name: 'Rolety Nadstawne CleverBox',

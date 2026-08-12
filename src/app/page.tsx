@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import Oferta from '@/components/Oferta';
+import OfertaSkrot from '@/components/OfertaSkrot';
 import ONasSkrot from '@/components/ONasSkrot';
 import PoradySkrot from '@/components/PoradySkrot';
 import RealizacjeSkrot from '@/components/RealizacjeSkrot';
@@ -19,7 +19,7 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
-        <Oferta />
+        <OfertaSkrot />
         <ONasSkrot />
         <PoradySkrot />
         <RealizacjeSkrot />

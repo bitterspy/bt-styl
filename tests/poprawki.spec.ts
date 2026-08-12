@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 
 // Testy weryfikujące poprawki z Poprawki/tasks.md oraz przebudowę multi-page
 // (osobne podstrony zamiast one-pagera, wzorem dobreoknaszczecin.pl).
+// Strona główna pokazuje tylko skróty; pełne sekcje (Oferta, Realizacje,
+// Porady, O nas) żyją na własnych podstronach.
 
 test.describe('Logo wraca do strony głównej', () => {
   test('logo na podstronie /oferta/[slug] linkuje do "/"', async ({ page }) => {
@@ -85,6 +87,30 @@ test.describe('Blog Aktualności', () => {
   });
 });
 
+test.describe('Oferta', () => {
+  test('strona główna pokazuje tylko skrót oferty (1 karta na kategorię) z linkiem do pełnej', async ({ page }) => {
+    await page.goto('/');
+    const section = page.locator('#oferta');
+    await section.scrollIntoViewIfNeeded();
+    await expect(section.getByText('Zobacz pełną ofertę')).toBeVisible();
+  });
+
+  test('podstrona /oferta pokazuje wszystkie kategorie produktów', async ({ page }) => {
+    await page.goto('/oferta/');
+    await expect(page.locator('#okna-pcv')).toBeVisible();
+    await expect(page.locator('#drzwi-tarasowe')).toBeVisible();
+    await expect(page.locator('#drzwi')).toBeVisible();
+    await expect(page.locator('#rolety')).toBeVisible();
+  });
+
+  test('kliknięcie "Zobacz pełną ofertę" na stronie głównej prowadzi na /oferta/', async ({ page }) => {
+    await page.goto('/');
+    const link = page.locator('#oferta').getByText('Zobacz pełną ofertę');
+    await link.click();
+    await page.waitForURL('**/oferta/');
+  });
+});
+
 test.describe('Drzwi Zewnętrzne Martom', () => {
   test('menu "Drzwi Zewnętrzne" prowadzi na naszą podstronę z wzorami (nie bezpośrednio do producenta)', async ({ page }) => {
     await page.goto('/');
@@ -95,8 +121,8 @@ test.describe('Drzwi Zewnętrzne Martom', () => {
     await page.waitForURL('**/oferta/drzwi-zewnetrzne/');
   });
 
-  test('karta Martom na stronie głównej prowadzi na naszą podstronę z wzorami', async ({ page }) => {
-    await page.goto('/');
+  test('karta Martom na podstronie /oferta prowadzi na naszą podstronę z wzorami', async ({ page }) => {
+    await page.goto('/oferta/');
     await page.locator('#drzwi').scrollIntoViewIfNeeded();
     const link = page.locator('#drzwi a[href="/oferta/drzwi-zewnetrzne/"]').first();
     await expect(link).toBeVisible();
@@ -128,8 +154,8 @@ test.describe('Szczegóły drzwi tarasowych', () => {
     });
   }
 
-  test('karty drzwi tarasowych na stronie głównej mają przycisk "Zobacz szczegóły"', async ({ page }) => {
-    await page.goto('/');
+  test('karty drzwi tarasowych na podstronie /oferta mają przycisk "Zobacz szczegóły"', async ({ page }) => {
+    await page.goto('/oferta/');
     await page.locator('#drzwi-tarasowe').scrollIntoViewIfNeeded();
     const buttons = page.locator('#drzwi-tarasowe a:has-text("Zobacz szczegóły")');
     await expect(buttons).toHaveCount(5);
@@ -145,7 +171,7 @@ test.describe('Zdjęcia biura', () => {
 });
 
 test.describe('Nowe podstrony multi-page', () => {
-  const strony = ['/o-nas/', '/aktualnosci/', '/realizacje/', '/porady/', '/kontakt/', '/oferta/drzwi-zewnetrzne/'];
+  const strony = ['/o-nas/', '/aktualnosci/', '/realizacje/', '/porady/', '/kontakt/', '/oferta/', '/oferta/drzwi-zewnetrzne/'];
 
   for (const url of strony) {
     test(`podstrona ${url} odpowiada statusem < 400`, async ({ page }) => {
@@ -162,6 +188,7 @@ test.describe('Nowe podstrony multi-page', () => {
     await expect(nav.getByRole('link', { name: 'Realizacje' })).toHaveAttribute('href', '/realizacje/');
     await expect(nav.getByRole('link', { name: 'Porady' })).toHaveAttribute('href', '/porady/');
     await expect(nav.getByRole('link', { name: 'Kontakt' })).toHaveAttribute('href', '/kontakt/');
+    await expect(nav.getByRole('link', { name: 'Oferta' })).toHaveAttribute('href', '/oferta/');
   });
 });
 
@@ -172,5 +199,15 @@ test.describe('Build sanity', () => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     expect(errors).toEqual([]);
+  });
+
+  test('strona główna pokazuje tylko 4 karty oferty, podstrona /oferta pokazuje wszystkie', async ({ page }) => {
+    await page.goto('/');
+    const homeCards = page.locator('#oferta .group.bg-white.rounded-2xl');
+    await expect(homeCards).toHaveCount(4);
+
+    await page.goto('/oferta/');
+    const totalCards = await page.locator('.group.bg-white.rounded-2xl').count();
+    expect(totalCards).toBeGreaterThan(10);
   });
 });

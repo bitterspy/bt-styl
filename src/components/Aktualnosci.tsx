@@ -50,7 +50,7 @@ export default function Aktualnosci() {
                     src={wpis.obrazek}
                     alt={wpis.tytul}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
