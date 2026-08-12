@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, ArrowRight } from 'lucide-react';
-import { wpisyDetale } from '@/lib/aktualnosciDetale';
+import { wpisyDetale, getPierwszyAkapit } from '@/lib/aktualnosciDetale';
 
 function formatujDate(iso: string) {
   return new Date(iso).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -62,7 +62,7 @@ export default function Aktualnosci() {
                   <h3 className="font-bold text-base mb-2 leading-tight" style={{ color: '#1a3a5c' }}>
                     {wpis.tytul}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{wpis.tresc[0]}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{getPierwszyAkapit(wpis)}</p>
                 </div>
               </Link>
             </motion.div>

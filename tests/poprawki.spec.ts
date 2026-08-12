@@ -210,4 +210,24 @@ test.describe('Build sanity', () => {
     const totalCards = await page.locator('.group.bg-white.rounded-2xl').count();
     expect(totalCards).toBeGreaterThan(10);
   });
+
+  test('kotwica cross-page nie chowa nagłówka sekcji pod fixed navbarem', async ({ page }) => {
+    // Regresja z code review: sekcje na /oferta/ potrzebują scroll-mt, bo
+    // Navbar jest position:fixed — bez tego nagłówek sekcji ląduje pod nim.
+    await page.goto('/oferta/drzwi-zewnetrzne/');
+    await page.getByRole('link', { name: 'Wróć do oferty' }).click();
+    await page.waitForURL('**/oferta/#drzwi');
+    const heading = page.locator('#drzwi h2', { hasText: 'Drzwi Zewnętrzne Martom' });
+    await expect(heading).toBeVisible();
+    const box = await heading.boundingBox();
+    expect(box?.y).toBeGreaterThan(60); // nie schowany pod headerem (~72-96px)
+  });
+
+  test('śródtytuły artykułu kończące się na "?" lub "!" renderują się jako nagłówki', async ({ page }) => {
+    // Regresja z code review: heurystyka jestSrodtytulem błędnie odrzucała
+    // krótkie śródtytuły z interpunkcją retoryczną na końcu.
+    await page.goto('/aktualnosci/najlepsze-okna-czyli-jakie-przedstawiamy-najlepsze-okna-w-ofercie-adams-w-roznych-kryteriach/');
+    const heading = page.getByRole('heading', { level: 2, name: 'Najlepsze okna, czyli jakie?' });
+    await expect(heading).toBeVisible();
+  });
 });

@@ -191,3 +191,22 @@ export const wpisyDetale: WpisDetal[] = [
 export function getWpisBySlug(slug: string) {
   return wpisyDetale.find((w) => w.slug === slug);
 }
+
+// Krótkie akapity bez kropki/wielokropka/cudzysłowu na końcu pełnią funkcję
+// śródtytułów w danych zescrapowanych z WordPressa (patrz renderowanie w
+// app/aktualnosci/[slug]/page.tsx) — użyj tej samej reguły wszędzie, gdzie
+// trzeba odróżnić nagłówek od właściwej treści (np. opis SEO).
+export function jestSrodtytulem(akapit: string) {
+  return akapit.trim().length < 60 && !/[.…"]$/.test(akapit.trim());
+}
+
+// Pierwszy akapit, który nie jest śródtytułem — do kart-zapowiedzi i opisu SEO.
+// tresc[0] bywa krótkim sloganem/nagłówkiem (np. "Postaw na jakość marki Adams!"),
+// więc surowe branie pierwszego elementu tablicy dawało czasem nagłówek zamiast opisu.
+export function getPierwszyAkapit(wpis: WpisDetal) {
+  return wpis.tresc.find((p) => !jestSrodtytulem(p)) ?? wpis.tresc[0];
+}
+
+export function getOpisSEO(wpis: WpisDetal) {
+  return getPierwszyAkapit(wpis)?.slice(0, 160);
+}

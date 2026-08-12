@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { ArrowLeft, Calendar, Phone } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { wpisyDetale, getWpisBySlug } from '@/lib/aktualnosciDetale';
+import { wpisyDetale, getWpisBySlug, jestSrodtytulem, getOpisSEO } from '@/lib/aktualnosciDetale';
 
 export function generateStaticParams() {
   return wpisyDetale.map((w) => ({ slug: w.slug }));
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!wpis) return {};
   return {
     title: `${wpis.tytul} | BT-Styl Szczecin`,
-    description: wpis.tresc[0]?.slice(0, 160),
+    description: getOpisSEO(wpis),
   };
 }
 
@@ -60,8 +60,7 @@ export default async function WpisDetailPage({ params }: { params: Promise<{ slu
 
           <div className="space-y-4 text-gray-700 leading-relaxed">
             {wpis.tresc.map((paragraf, i) => {
-              const jestSrodtytulem = paragraf.length < 60 && !/[.!?"]$/.test(paragraf.trim());
-              if (jestSrodtytulem) {
+              if (jestSrodtytulem(paragraf)) {
                 return (
                   <h2 key={i} className="text-lg sm:text-xl font-bold pt-4" style={{ color: '#1a3a5c' }}>
                     {paragraf}

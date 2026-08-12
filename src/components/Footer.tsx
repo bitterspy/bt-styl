@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { contact } from '@/lib/data';
+import { OFERTA_OKNA, OFERTA_DRZWI_TARASOWE, OFERTA_ROLETY } from '@/lib/ofertaRoutes';
 import { LogoSVG } from './Logo';
 
 export default function Footer() {
@@ -25,10 +26,10 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4 text-sm tracking-wide uppercase" style={{ color: '#e8a020' }}>Oferta</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              <li><Link href="/oferta/#okna-pcv" className="hover:text-white transition-colors">Okna PCV</Link></li>
-              <li><Link href="/oferta/#drzwi-tarasowe" className="hover:text-white transition-colors">Drzwi Tarasowe</Link></li>
+              <li><Link href={OFERTA_OKNA} className="hover:text-white transition-colors">Okna PCV</Link></li>
+              <li><Link href={OFERTA_DRZWI_TARASOWE} className="hover:text-white transition-colors">Drzwi Tarasowe</Link></li>
               <li><Link href="/oferta/drzwi-zewnetrzne/" className="hover:text-white transition-colors">Drzwi Zewnętrzne</Link></li>
-              <li><Link href="/oferta/#rolety" className="hover:text-white transition-colors">Rolety</Link></li>
+              <li><Link href={OFERTA_ROLETY} className="hover:text-white transition-colors">Rolety</Link></li>
             </ul>
             <h4 className="font-bold mt-6 mb-3 text-sm tracking-wide uppercase" style={{ color: '#e8a020' }}>Firma</h4>
             <ul className="space-y-2 text-sm text-blue-200">

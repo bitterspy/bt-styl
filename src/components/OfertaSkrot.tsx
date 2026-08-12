@@ -4,9 +4,16 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { ProductCard, okna, drzwiTarasowe, drzwiZewnetrzne, rolety } from './Oferta';
+import { ProductCard } from './ProductCard';
+import { okna, drzwiTarasowe, drzwiZewnetrzne, rolety } from '@/lib/ofertaData';
 
-const podglad = [okna[0], drzwiTarasowe[0], drzwiZewnetrzne[0], rolety[0]];
+// Preferuj produkt oznaczony odznaką (BESTSELLER/POLECANY/HIT...), żeby
+// zapowiedź na stronie głównej nie zależała po cichu od kolejności w tablicy.
+function wybierzPodglad<T extends { badge: string | null }>(kategoria: T[]): T {
+  return kategoria.find((p) => p.badge) ?? kategoria[0];
+}
+
+const podglad = [okna, drzwiTarasowe, drzwiZewnetrzne, rolety].map(wybierzPodglad);
 
 export default function OfertaSkrot() {
   const ref = useRef(null);

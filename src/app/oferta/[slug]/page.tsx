@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import KoloryGrid from '@/components/KoloryGrid';
 import { oknaDetale, getOknoBySlug } from '@/lib/oknaDetale';
 import { drzwiTarasoweDetale, getDrzwiTarasoweBySlug } from '@/lib/drzwiTarasoweDetale';
+import { OFERTA_OKNA, OFERTA_DRZWI_TARASOWE } from '@/lib/ofertaRoutes';
 
 function getDetalBySlug(slug: string) {
   return getOknoBySlug(slug) ?? getDrzwiTarasoweBySlug(slug);
@@ -32,7 +33,7 @@ export default async function OknoDetailPage({ params }: { params: Promise<{ slu
   if (!produkt) notFound();
 
   const isDrzwiTarasowe = drzwiTarasoweDetale.some((d) => d.slug === slug);
-  const wrocHref = isDrzwiTarasowe ? '/oferta/#drzwi-tarasowe' : '/oferta/#okna-pcv';
+  const wrocHref = isDrzwiTarasowe ? OFERTA_DRZWI_TARASOWE : OFERTA_OKNA;
   const drzwiDetal = getDrzwiTarasoweBySlug(slug);
   const przekroje = drzwiDetal?.przekroje;
   const dokumenty = drzwiDetal?.dokumenty;

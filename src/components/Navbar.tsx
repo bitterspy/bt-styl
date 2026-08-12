@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, ChevronDown, LogIn } from 'lucide-react';
 import { LogoSVG } from './Logo';
 import Link from 'next/link';
+import { OFERTA_OKNA, OFERTA_DRZWI_TARASOWE, OFERTA_ROLETY } from '@/lib/ofertaRoutes';
 
 const ofertaLinks = [
-  { label: 'Okna PCV', href: '/oferta/#okna-pcv' },
-  { label: 'Drzwi Tarasowe / Balkonowe', href: '/oferta/#drzwi-tarasowe' },
+  { label: 'Okna PCV', href: OFERTA_OKNA },
+  { label: 'Drzwi Tarasowe / Balkonowe', href: OFERTA_DRZWI_TARASOWE },
   { label: 'Drzwi Zewnętrzne', href: '/oferta/drzwi-zewnetrzne/' },
-  { label: 'Rolety', href: '/oferta/#rolety' },
+  { label: 'Rolety', href: OFERTA_ROLETY },
 ];
 
 const navLinks: { href: string; label: string; hasMega?: boolean }[] = [

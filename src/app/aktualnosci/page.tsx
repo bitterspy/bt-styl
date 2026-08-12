@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Calendar, ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { wpisyDetale } from '@/lib/aktualnosciDetale';
+import { wpisyDetale, getPierwszyAkapit } from '@/lib/aktualnosciDetale';
 
 export const metadata = {
   title: 'Aktualności | BT-Styl Szczecin',
@@ -53,7 +53,7 @@ export default function AktualnosciPage() {
                   <h2 className="font-bold text-base mb-2 leading-tight flex-1" style={{ color: '#1a3a5c' }}>
                     {wpis.tytul}
                   </h2>
-                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">{wpis.tresc[0]}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">{getPierwszyAkapit(wpis)}</p>
                   <div className="flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all" style={{ color: '#c0392b' }}>
                     Czytaj więcej <ArrowRight size={14} />
                   </div>
