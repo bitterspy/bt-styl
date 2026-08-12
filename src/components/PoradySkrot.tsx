@@ -5,16 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BookOpen } from 'lucide-react';
-import { articles } from './Porady';
-
-const categoryColors: Record<string, string> = {
-  Montaż: '#c0392b',
-  Formalności: '#2563eb',
-  Użytkowanie: '#16a34a',
-  'Dobór okien': '#7c3aed',
-  Energooszczędność: '#e8a020',
-  Bezpieczeństwo: '#dc2626',
-};
+import { articles, categoryColors } from '@/lib/poradyDetale';
 
 export default function PoradySkrot() {
   const ref = useRef(null);
@@ -50,7 +41,7 @@ export default function PoradySkrot() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <Link
-                href="/porady/"
+                href={`/porady/${article.slug}/`}
                 className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100"
               >
                 <div className="relative h-44 overflow-hidden">
@@ -58,7 +49,7 @@ export default function PoradySkrot() {
                     src={article.image}
                     alt={article.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 640px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />

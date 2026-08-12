@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { oknaDetale } from '@/lib/oknaDetale';
 import { drzwiTarasoweDetale } from '@/lib/drzwiTarasoweDetale';
 import { wpisyDetale } from '@/lib/aktualnosciDetale';
+import { articles } from '@/lib/poradyDetale';
 
 // Wymagane przy output: 'export' — bez tego next build pada na /sitemap.xml.
 export const dynamic = 'force-static';
@@ -33,5 +34,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(w.data),
   }));
 
-  return [...staticRoutes, ...produktRoutes, ...wpisRoutes];
+  const poradaRoutes = articles.map((a) => ({
+    url: `${BASE_URL}/porady/${a.slug}/`,
+    lastModified: new Date(),
+  }));
+
+  return [...staticRoutes, ...produktRoutes, ...wpisRoutes, ...poradaRoutes];
 }

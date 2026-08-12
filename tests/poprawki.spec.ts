@@ -170,6 +170,43 @@ test.describe('Zdjęcia biura', () => {
   });
 });
 
+test.describe('Blog Porad (SEO)', () => {
+  test('lista /porady pokazuje wszystkie 19 artykułów', async ({ page }) => {
+    await page.goto('/porady/');
+    const cards = page.locator('a[href^="/porady/"]').filter({ hasText: /Czytaj więcej/ });
+    await expect(cards).toHaveCount(19);
+  });
+
+  test('kliknięcie karty na stronie głównej otwiera pełną podstronę artykułu', async ({ page }) => {
+    await page.goto('/');
+    const card = page.locator('a[href^="/porady/"]').first();
+    const href = await card.getAttribute('href');
+    await card.click();
+    await page.waitForURL(`**${href}`);
+    const bodyText = await page.locator('main').innerText();
+    expect(bodyText.length).toBeGreaterThan(300);
+  });
+
+  test('nowe artykuły pod frazy SEO istnieją pod czytelnym URL', async ({ page }) => {
+    const sluggi = [
+      'jakie-okna-do-salonu',
+      'ile-kosztuja-okna-do-domu',
+      'po-ilu-latach-wymienic-okna',
+      'jakiej-firmy-okna-wybrac',
+      'drzwi-tarasowe-przesuwne-czy-otwierane',
+      'jakie-rolety-zewnetrzne-wybrac',
+      'kolor-okien-jaki-wybrac',
+      'okna-antywlamaniowe',
+      'okna-do-domu-pasywnego',
+      'ograniczniki-otwarcia-i-nawiewniki',
+    ];
+    for (const slug of sluggi) {
+      const res = await page.goto(`/porady/${slug}/`);
+      expect(res?.status(), slug).toBeLessThan(400);
+    }
+  });
+});
+
 test.describe('Nowe podstrony multi-page', () => {
   const strony = ['/o-nas/', '/aktualnosci/', '/realizacje/', '/porady/', '/kontakt/', '/oferta/', '/oferta/drzwi-zewnetrzne/'];
 
